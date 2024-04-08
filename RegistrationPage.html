@@ -3,45 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ioTBay</title>
-
-    <style>
-        body {
-          background-image: url('LoginPageBackground.jpeg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          max-width: 800px;
-        }
-        h1{
-            color: white;
-            border-radius: 10%;
-            display: block;
-            text-align: left;
-            
-        }
-        button{
-            color: rgb(5, 5, 6);
-            background-color: rgb(70, 143, 221);
-        }
-        </style>
-       
+    <link rel="stylesheet" href="styles.css">
+    <title>Register</title>
 </head>
 <body>
-    <h1>Lets get you Registered...</h1>
-    <form style="display: block; margin-left: 400px;margin-top: 100px;width: 55%; background-color: rgba(161, 128, 235, 0.841); padding-left: 50px; padding-top: 50px; padding-bottom: 50px;"   >
-        <label style="width: 200px; height: 50px;padding-left: 30px;" for="Firstname">First Name</label>
-        <input style="width: 250px; height: 25px;" type="text" name="name" id="Firstname">
-        <br>
-        <br>
-        <label style="width: 200px; height: 50px;padding-left: 33px;" for="Lastname">Last Name</label>
-        <input style="width: 250px; height: 25px;" type="text" name="email" id="Lastname">
-        <br>
-        <br>   
-        <label style="width: 200px; height: 50px;padding-left: 30px;" for="password">Password</label>
-        <input style="width: 250px; height: 25px;" type="password" name="name" id="password">
-        <br>
-        <br>   
-        <button style="width: 200px; height: 40px; align-self: center;">Register</button>    
+    <form class="registration-form">
+        <label for="Username">Username:</label>
+        <input type="email" name="username" id="username"> 
+        
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        
+        <button type="submit">Register</button>    
     </form>
     
 </body>
