@@ -47,6 +47,11 @@ button:disabled {
     pointer-events: none;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 a#cancelbutton {
     color: black;
     background-color: rgb(70, 143, 221);

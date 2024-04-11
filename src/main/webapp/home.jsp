@@ -31,7 +31,7 @@
             <main>
                 <section>
                     <h1>You have not registered, please fill in the form to view IoTBay catalogue!</h1>
-                    <button type="button" onclick="location.href='register.jsp';">Register</button>
+                    <button type="button" onclick="location.href='login.jsp';">Return to Login</button>
                 </section>
             </main>
             <footer>
