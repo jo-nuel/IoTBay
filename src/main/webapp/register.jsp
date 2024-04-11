@@ -15,7 +15,6 @@
             String email = request.getParameter("email");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            String tos = request.getParameter("tos");
             String submitted = request.getParameter("submitted");
 
             if (submitted != null){
@@ -23,31 +22,29 @@
                 session.setAttribute("user", user);
             }
         %>
-        <% if (session.getAttribute("user") != null) { %>
+        <% if (session.getAttribute("user") != null) {
+            response.sendRedirect("login.jsp");
+        } 
+        else { %>
             <h1>IoTBay</h1>
-            <h1>An account already exists, log in or reset to register again.</h1>
-            <button><a href="login.jsp">Back to Login</a></button>
-            <button><a href="logout.jsp">Cancel account to register again.</a></button>
+            <form class="registration-form">
+                <label for="Email">Email:</label>
+                <input type="email" name="email" id="email" required> 
 
-        <% } else { %>
-        <form class="registration-form">
-            <label for="Email">Email:</label>
-            <input type="email" name="email" id="email" required> 
+                <label for="Username">Username:</label>
+                <input type="username" name="username" id="username" required> 
+                    
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
 
-            <label for="Username">Username:</label>
-            <input type="username" name="username" id="username" required> 
-                
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
+                <label for="tos">TOS:</label>
+                <input type="checkbox" name="tos" id="tos" placeholder="tos" required/>
 
-            <label for="tos">TOS:</label>
-            <input type="checkbox" name="tos" id="tos" placeholder="tos" required/>
-
-            <input type="hidden" name="submitted" id="submitted" value="true" />
-                
-            <button onclick="window.location.href = 'login.jsp';" type="submit">Register</button>    
-            <a id="cancelbutton" href="login.jsp">Cancel</a>
-        </form>
+                <input type="hidden" name="submitted" id="submitted" value="true" />
+                    
+                <button type="submit">Register</button>    
+                <a id="cancelbutton" href="login.jsp">Cancel</a>
+            </form>
 
         <% } %>
     </body>
