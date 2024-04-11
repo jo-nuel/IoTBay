@@ -6,8 +6,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href = "/css/styles.css" type="text/css">
-        <title>Register</title>
+        <title>Register</title> 
     </head>
     <body >
         <%
@@ -23,8 +24,10 @@
             }
         %>
         <% if (session.getAttribute("user") != null) { %>
+            <h1>IoTBay</h1>
             <h1>An account already exists, log in or reset to register again.</h1>
             <button><a href="login.jsp">Back to Login</a></button>
+            <button><a href="logout.jsp">Cancel account to register again.</a></button>
 
         <% } else { %>
         <form class="registration-form">
@@ -38,9 +41,11 @@
             <input type="password" name="password" id="password" required>
 
             <label for="tos">TOS:</label>
-            <input type="checkbox" name="tos" id="tos" placeholder="tos" />
+            <input type="checkbox" name="tos" id="tos" placeholder="tos" required/>
+
+            <input type="hidden" name="submitted" id="submitted" value="true" />
                 
-            <button type="submit">Register</button>    
+            <button onclick="window.location.href = 'login.jsp';" type="submit">Register</button>    
             <a id="cancelbutton" href="login.jsp">Cancel</a>
         </form>
 
