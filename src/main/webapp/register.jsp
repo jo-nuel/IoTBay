@@ -10,7 +10,7 @@
         <link rel="stylesheet" href = "/css/styles.css" type="text/css">
         <title>Register</title> 
     </head>
-    <body >
+    <body class="registerbody">
         <%
             String email = request.getParameter("email");
             String username = request.getParameter("username");
@@ -26,7 +26,7 @@
             response.sendRedirect("login.jsp");
         } 
         else { %>
-            <h1>IoTBay</h1>
+            <h1 style="color: white;">IoTBay</h1>
             <form class="registration-form">
                 <label for="Email">Email:</label>
                 <input type="email" name="email" id="email" required> 

@@ -6,6 +6,28 @@ body {
     background-color: #f4f4f4;
 }
 
+.registerbody {
+    background-image: url(/images/Registrationpage.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 800px;
+    margin-top: 10%;
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: Arial, sans-serif; 
+}
+
+.loginbody {
+    background-image: url(/images/Registrationpage.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 800px;
+    margin-top: 10%;
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: Arial, sans-serif; 
+}
+
 #topbar {
     color: white;
     text-align: center;
@@ -16,6 +38,7 @@ h1 {
     color: black;
     text-align: center;
     padding: 20px;
+    font-family: Arial, sans-serif; 
 }
 
 button {

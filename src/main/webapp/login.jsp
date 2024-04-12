@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <title>Login</title> 
 </head>
-<body>
+<body class="loginbody">
     <%
         String submitted = request.getParameter("submitted");
 
@@ -20,7 +20,7 @@
         }
     %>
 
-    <h1>IoTBay</h1>
+    <h1 style="color: white;">IoTBay</h1>
     <%
         User user = (User) session.getAttribute("user");
     %>
