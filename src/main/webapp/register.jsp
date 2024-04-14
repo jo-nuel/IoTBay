@@ -15,14 +15,15 @@
             String email = request.getParameter("email");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            String address = request.getParameter("address");
             String submitted = request.getParameter("submitted");
 
             if (submitted != null){
-                User user = new User(email, username, password);
-                session.setAttribute("user", user);
+                Customer customer = new Customer(email, username, password, address);
+                session.setAttribute("customer", customer);
             }
         %>
-        <% if (session.getAttribute("user") != null) {
+        <% if (session.getAttribute("customer") != null) {
             response.sendRedirect("login.jsp");
         } 
         else { %>

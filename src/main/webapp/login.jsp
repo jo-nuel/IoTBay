@@ -22,7 +22,7 @@
 
     <h1 style="color: white;">IoTBay</h1>
     <%
-        User user = (User) session.getAttribute("user");
+        Customer customer = (Customer) session.getAttribute("customer");
     %>
     <form class="login-form">
         <label for="Username">Username:</label>
@@ -33,7 +33,7 @@
 
         <input type="hidden" name="submitted" id="submitted" value="true" />
 
-        <% if(user == null) { %>
+        <% if(customer == null) { %>
             <button type="submit" disabled>Login</button>
         <% } else { %>
             <button type="submit">Login</button>

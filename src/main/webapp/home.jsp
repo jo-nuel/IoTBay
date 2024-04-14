@@ -9,14 +9,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href = "css/styles.css">
         <link rel="stylesheet" href = "css/homepage.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Home</title>
     </head>
     <body>
         <%
-                User user = (User) session.getAttribute("user");
+                Customer customer = (Customer) session.getAttribute("customer");
         %>
 
-        <% if(user == null) { %>
+        <% if(customer == null) { %>
             <header>
                 <div class="container">
                     <div class="brand">
@@ -49,7 +50,7 @@
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                     <div>
-                        <h1><%=user.getUsername()%></h1>
+                        <h1><%=customer.getUsername()%></h1>
                     </div>
                     <div>
                         <button><a href="logout.jsp">Logout</a></button>
