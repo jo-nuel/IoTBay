@@ -4,10 +4,12 @@ public class Customer extends User {
     private String customerType;
     private String shippingAddress;
     private boolean accountActive;
-    private String paymentDetails;
 
-    public Customer(String _userName, String _userEmail, String _password, String _userType, String _customerType, String shippingAddress, String _paymentDetails) {
+    public Customer(String _userName, String _userEmail, String _password, String _userType, String _customerType, String _shippingAddress, boolean _accountActive) {
         super(_userName, _userEmail, _password, _userType);
+        this.customerType = _customerType;
+        this.shippingAddress = _shippingAddress;
+        this.accountActive = _accountActive;
     }
 
     public String getCustomerType() {
@@ -32,13 +34,5 @@ public class Customer extends User {
 
     public void setAccountActive(boolean accountActive) {
         this.accountActive = accountActive;
-    }
-
-    public String getPaymentDetails() {
-        return paymentDetails;
-    }
-
-    public void setPaymentDetails(String paymentDetails) {
-        this.paymentDetails = paymentDetails;
     }
 }
