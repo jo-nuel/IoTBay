@@ -6,7 +6,7 @@ public class Staff extends User {
     private Date empDate;
 
     public Staff(String email, String username, String password, Date empDate) {
-        super(email, username, password);
+        super(email, username, password, password);
         this.empDate = empDate;
     }
 
