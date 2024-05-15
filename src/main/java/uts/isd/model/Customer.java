@@ -1,18 +1,38 @@
 package uts.isd.model;
 
 public class Customer extends User {
-    private String address;
+    private String customerType;
+    private String shippingAddress;
+    private boolean accountActive;
 
-    public Customer(String email, String username, String password, String address) {
-        super(email, username, password);
-        this.address = address;
+    public Customer(String _userName, String _userEmail, String _password, String _userType, String _customerType, String _shippingAddress, boolean _accountActive) {
+        super(_userName, _userEmail, _password, _userType);
+        this.customerType = _customerType;
+        this.shippingAddress = _shippingAddress;
+        this.accountActive = _accountActive;
     }
 
-    public void setAddress(String value) {
-        this.address = value;
+    public String getCustomerType() {
+        return customerType;
     }
 
-    public String getAddress() {
-        return this.address;
+    public void setCustomerType(String customerType) {
+        this.customerType = customerType;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public boolean isAccountActive() {
+        return accountActive;
+    }
+
+    public void setAccountActive(boolean accountActive) {
+        this.accountActive = accountActive;
     }
 }
