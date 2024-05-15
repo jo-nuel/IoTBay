@@ -23,8 +23,8 @@ public class DBConnector extends DB {
         }
     }
 
-    public Connection openConnection() {
-        return this.conn;
+    public Connection openConnection() throws SQLException {
+        return DriverManager.getConnection(URL + db, dbuser, dbpass);
     }
 
     public void closeConnection() throws SQLException {
