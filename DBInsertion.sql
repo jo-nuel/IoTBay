@@ -20,3 +20,51 @@ INSERT INTO iotbay.devices (deviceName,devicePrice,deviceDesc,deviceStock,device
 	 ('Gaming Laptop Sigma',1149.99,'High performance for gaming and graphic design',95,1,'Laptops','SigmaComputing','/images/gamingLaptop.webp'),
 	 ('Smart Oven Tau',1199.99,'Cooks automatically with preset recipes',100,1,'Home Automation','TauKitchen','/images/smartOven.jpeg'),
 	 ('Home Security System Upsilon',1249.99,'Monitors and protects your home remotely',105,0,'Home Automation','UpsilonSecure','/images/homeSecurity.jpeg');
+
+
+--INSERT CUSTOMERS
+
+INSERT INTO iotbay.user (userName, userEmail, password, userType) VALUES
+	("Margaret Murray", "Margaret.Murray@gmail.com", "trench", "Customer"),
+	("Janette Mcintyre", "Janette.Mcintyre@hotmail.com", "window", "Customer"),
+	("Jackson Vance", "Jackson.Vance@outlook.com", "domestic", "Customer"),
+	("Tamika Barron", "Tamika.Barron@outlook.com", "opponent", "Customer"),
+	("Gregg Simmons", "Gregg.Simmons@gmail.com", "shed", "Customer"),
+	("Monica Bowers", "Monica.Bowers@gmail.com", "underline", "Customer"),
+	("Sid Duran", "Sid.Duran@hotmail.com", "clinic", "Customer"),
+	("Irwin Sanchez", "Irwin.Sanchez@outlook.com", "survival", "Customer"),
+	("Florencio Griffith", "Florencio.Griffith@gmail.com", "despair", "Customer"),
+	("Gwen Harper", "Gwen.Harper@gmail.com", "sand", "Customer"),
+	("Sol Duke", "Sol.Duke@hotmail.com", "advice", "Customer"),
+	("Hollis Zamora", "Hollis.Zamora@gmail.com", "confusion", "Customer"),
+	("Carla Ramsey", "Carla.Ramsey@gmail.com", "intelligence", "Customer"),
+	("Lillian Hensley", "Lillian.Hensley@hotmail.com", "professional", "Customer"),
+	("Derick Hopkins", "Derick.Hopkins@gmail.com", "public", "Customer"),
+	("Noble Rojas", "Noble.Rojas@gmail.com", "drug", "Customer"),
+	("Mohammad Lewis", "Mohammad.Lewis@hotmail.com", "production", "Customer"),
+	("Yesenia Curry", "Yesenia.Curry@hotmail.com", "white", "Customer"),
+	("Lowell David", "Lowell David", "whole", "Customer"),
+	("Gilda Yates", "Gilda.Yates@hotmail.com", "salvation", "Customer")
+
+INSERT INTO iotbay.customer (userID, customerType, shippingAddress, accountActive) VALUES
+	(1, "Individual", "39 Bungana Drive", true),
+	(2, "Individual", "20 Healy Road", true),
+	(3, "Individual", "84 Rockhampton", true),
+	(4, "Individual", "33 Mills Street", true),
+	(5, "Individual", "1 Purcell Place", true),
+	(6, "Individual", "54 Lapko Road", true),
+	(7, "Individual", "4 Friar John Way", true),
+	(8, "Individual", "29 Yangan Drive", true),
+	(9, "Individual", "5 Carolina Park Road", true),
+	(10, "Company", "41 Austin Road", true),
+	(11, "Individual", "34 Hereford Avenue", true),
+	(12, "Individual", "26 Commercial Street", true),
+	(13, "Individual", "32 Cornish Stree", true),
+	(14, "Company", "97 Chatsworth Drive", true),
+	(15, "Company", "1 Eurack Court", true),
+	(16, "Individual", "49 Henley Beach Road", true),
+	(17, "Individual", "52 Gadd Avenue", true),
+	(18, "Individual", "5 Webb Road", true),
+	(19, "Individual", "24 Darwinia Loop", false),
+	(20, "Individual", "28 Tapleys Hill Road", false);
+
