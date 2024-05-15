@@ -1,7 +1,8 @@
-package uts.isd.test;
+package uts.unit;
 
 import uts.isd.model.dao.CustomerDAO;
 import uts.isd.model.dao.DBConnector;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,11 +19,11 @@ import uts.isd.model.Payment;
 public class customerDAOTest {
     private CustomerDAO customerDAO;
     private DBConnector connector;
-	private Connection conn;
+    private Connection conn;
 
     public customerDAOTest() throws SQLException, ClassNotFoundException {
         connector = new DBConnector();
-		conn = connector.openConnection();
+        conn = connector.openConnection();
         customerDAO = new CustomerDAO(conn);
     }
 
@@ -53,16 +54,16 @@ public class customerDAOTest {
 
     @Test
     public void testDeleteCustomer() throws SQLException {
-        //Add test customer
+        // Add test customer
         customerDAO.AddCustomer("TestName", "test@email", "1234", "Customer", "Individual", "Test");
-        //Get test customer ID
+        // Get test customer ID
         ArrayList<Customer> customers = customerDAO.getAllCustomers();
         int oldListSize = customers.size();
-        Customer lastAdded = customers.get(customers.size()-1);
+        Customer lastAdded = customers.get(customers.size() - 1);
         int ID = lastAdded.getUserID();
-        //Delete customer with ID
+        // Delete customer with ID
         customerDAO.deleteCustomer(ID);
-        //Check that list has original size before adding
+        // Check that list has original size before adding
         assertEquals(oldListSize, customerDAO.getAllCustomers().size());
     }
 
@@ -71,13 +72,13 @@ public class customerDAOTest {
         customerDAO.AddCustomer("TestName", "test@email", "1234", "Customer", "Individual", "Test");
 
         ArrayList<Customer> customers = customerDAO.getAllCustomers();
-        Customer lastAdded = customers.get(customers.size()-1);
+        Customer lastAdded = customers.get(customers.size() - 1);
         int ID = lastAdded.getUserID();
 
         customerDAO.updateCustomer(ID, "SecondName", "newEmail", "4321", "Customer", "Company", "Test2", false);
 
         ArrayList<Customer> newCustomers = customerDAO.getAllCustomers();
-        Customer updatedCustomer = customers.get(customers.size()-1);
+        Customer updatedCustomer = customers.get(customers.size() - 1);
 
         assertEquals("TestName", updatedCustomer.getUserName());
         assertEquals("test@email", updatedCustomer.getUserEmail());
