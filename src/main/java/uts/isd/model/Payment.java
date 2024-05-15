@@ -4,37 +4,76 @@ import java.io.Serializable;
 
 public class Payment implements Serializable {
     private int paymentID;
-    private int paymentType;
-    private double paymentFinal;
-
-    public Payment(int paymentID, int paymentType, float paymentFinal) {
+    private String paymentType;
+    private String cardName;
+    private String cardNumber;
+    private String cardExpiryDate;
+    private String cardCvv;
+    
+    
+//payment date , cardname , cardnumber , card expiry date , card cvv , saved card name , saved card number , saved expiry date , saved cvv
+    public Payment(int paymentID, String paymentType, String cardName,
+    String cardNumber, String cardExpiryDate, String cardCvv) {
 
         this.paymentID = paymentID;
         this.paymentType = paymentType;
-        this.paymentFinal = paymentFinal;
+        this.cardName = cardName;
+        this.cardNumber= cardNumber;
+        this.cardExpiryDate = cardExpiryDate;
+        this.cardCvv = cardCvv;
+        
     }
 
-    public int getPaymentID() {
+    public int getpaymentID() {
         return paymentID;
     }
 
-    public void setPaymentID(int paymentID) {
+    public void setpaymentID(int paymentID) {
         this.paymentID = paymentID;
     }
 
-    public int getPaymentType() {
+
+    public String getpaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(int paymentType) {
+    public void setpaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 
-    public double getPaymentFinal() {
-        return paymentFinal;
+    public String getcardName() {
+        return cardName;
     }
 
-    public void setPaymentFinal(double paymentFinal) {
-        this.paymentFinal = paymentFinal;
+    public void setcardName(String cardName) {
+        this.cardName = cardName;
     }
+
+
+    public String getcardNumber() {
+        return cardNumber;
+    }
+
+    public void setcardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+     public String getcardExpiryDate() {
+        return cardExpiryDate;
+    }
+
+    public void setcardExpiryDate(String cardExpiryDate) {
+        this.cardExpiryDate = cardExpiryDate;
+    }
+
+
+    public String getcardCvv() {
+        return cardCvv;
+    }
+
+    public void setcardCvv(String cardCvv) {
+        this.cardCvv = cardCvv;
+    }
+
+
 }

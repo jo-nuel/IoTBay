@@ -54,5 +54,10 @@ public class User implements Serializable {
 		this.userType = userType;
 	}
 
+    public void setPhone(String phone) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPhone'");
+    }
+
 	
 }

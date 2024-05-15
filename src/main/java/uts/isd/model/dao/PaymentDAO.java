@@ -26,7 +26,7 @@ public class PaymentDAO {
             throw ex;
         }
     }
-
+  
     public void addPaymentDetails(String cardName, String cardNumber, String expiryDate, String cvv) throws SQLException {
         // Set parameters for the prepared statement
         addPaymentDetailsSt.setString(1, cardName);
