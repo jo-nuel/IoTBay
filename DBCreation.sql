@@ -12,3 +12,30 @@ CREATE TABLE `devices` (
   `deviceImageURL` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`deviceID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1009 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- iotbay.user
+
+CREATE TABLE IoTBay.`user` (
+	userID INT auto_increment NOT NULL,
+	userName varchar(100) NULL,
+	userEmail varchar(100) NULL,
+	password varchar(100) NULL,
+	userType varchar(100) NULL,
+	CONSTRAINT user_pk PRIMARY KEY (userID)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci;
+
+-- iotbay.customer
+
+CREATE TABLE IoTBay.customer (
+	userID INT NULL,
+	customerType varchar(100) NULL,
+	shippingAddress varchar(100) NULL,
+	accountActive TINYINT NULL,
+	CONSTRAINT customer_user_FK FOREIGN KEY (userID) REFERENCES IoTBay.`user`(userID)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci;

@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import uts.isd.model.Customer;
-import uts.isd.model.Payment;
 
 public class customerDAOTest {
     private CustomerDAO customerDAO;
