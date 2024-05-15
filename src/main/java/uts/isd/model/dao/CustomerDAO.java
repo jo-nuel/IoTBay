@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import uts.isd.model.Customer;
 
 public class CustomerDAO {
@@ -14,13 +16,42 @@ public class CustomerDAO {
         connection.setAutoCommit(true);
     }
 
+    public ArrayList<Customer> getAllCustomers() throws SQLException{
+        String getCustomer = "SELECT user.userID, user.userName, user.userEmail, user.password, user.userType, customer.customerType, customer.shippingAddress, customer.accountActive FROM user INNER JOIN customer ON user.userID = customer.userID";
+
+        ArrayList<Customer> customers = new ArrayList<>();
+
+        try {
+            PreparedStatement getCustomers = conn.prepareStatement(getCustomer);
+            ResultSet rs = getCustomers.executeQuery();
+
+            while (rs.next()){
+                String username = rs.getString(2);
+                String email = rs.getString(3);
+                String password = rs.getString(4);
+                String usertype = rs.getString(5);
+                String custtype = rs.getString(6);
+                String shippingAddress = rs.getString(7);
+                Boolean active = rs.getBoolean(8);
+
+                Customer customer = new Customer(username, email, password, usertype, custtype, shippingAddress, active);
+                customers.add(customer);
+            }
+        }
+        finally {
+            
+        }
+
+        return customers;
+    }
+
     //Add new customer (and user record)
     public void AddCustomer(String _userName, String _userEmail, String _password, String _userType, 
-            String _customerType, String _shippingAddress, String _paymentDetails) throws SQLException{
+            String _customerType, String _shippingAddress) throws SQLException{
                 
         String makeUserString = "INSERT INTO user (userName, userEmail, password, userType) VALUES (?, ?, ?, ?)";
         String getIDString = "SELECT LAST_INSERT_ID()";
-        String makeCustomerString = "INSERT INTO customer (userID, customerType, shippingAddress, accountActive, shippingAddress) VALUES (?, ?, ?, ?, ?)";
+        String makeCustomerString = "INSERT INTO customer (userID, customerType, shippingAddress, accountActive) VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement makeUser = conn.prepareStatement(makeUserString);
@@ -39,8 +70,7 @@ public class CustomerDAO {
             makeCustomer.setInt(1, userID);
             makeCustomer.setString(2, _customerType);
             makeCustomer.setString(3, _shippingAddress);
-            makeCustomer.setBoolean(4, true);
-            makeCustomer.setString(5, _paymentDetails);         
+            makeCustomer.setBoolean(4, true);       
             makeCustomer.executeUpdate();
         }
         finally {
@@ -48,24 +78,25 @@ public class CustomerDAO {
         }
     }
 
-    public void updatedCustomer(String[] newValues) throws SQLException {
+    public void updateCustomer(int _userID, String _userName, String _userEmail, String _password, String _userType, 
+            String _customerType, String _shippingAddress, boolean _accountActive) throws SQLException {
         String updateUserString = "UPDATE user SET (userName, userEmail, password, userType) VALUES (?, ?, ?, ?) where userID = ?";
-        String updateCustomerString = "UPDATE customer SET (customerType, shippingAddress, accountActive, shippingAddress) VALUES (?, ?, ?, ?) where userID = ?";
+        String updateCustomerString = "UPDATE customer SET (customerType, shippingAddress, accountActive) VALUES (?, ?, ?) where userID = ?";
 
         try {
             PreparedStatement updateUser = conn.prepareStatement(updateUserString);
-            updateUser.setString(1, newValues[0]);
-            updateUser.setString(2, newValues[1]);
-            updateUser.setString(3, newValues[2]);
-            updateUser.setString(4, newValues[3]);
+            updateUser.setString(1, _userName);
+            updateUser.setString(2, _userEmail);
+            updateUser.setString(3, _password);
+            updateUser.setString(4, _userType);
+            updateUser.setInt(5, _userID);
             updateUser.executeUpdate();
 
             PreparedStatement updateCustomer = conn.prepareStatement(updateCustomerString);
-            updateCustomer.setString(1, newValues[4]);
-            updateCustomer.setString(2, newValues[5]);
-            updateCustomer.setString(3, newValues[6]);
-            updateCustomer.setString(4, newValues[7]);
-            updateCustomer.setInt(6, Integer.valueOf(newValues[7]));
+            updateCustomer.setString(1, _customerType);
+            updateCustomer.setString(2, _shippingAddress);
+            updateCustomer.setBoolean(3,_accountActive);
+            updateCustomer.setInt(4, _userID);
             updateCustomer.executeUpdate();
         }
         finally {
