@@ -39,3 +39,15 @@ CREATE TABLE IoTBay.customer (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_0900_ai_ci;
+
+-- iotbay.Payment definition
+
+CREATE TABLE `Payment` (
+  `paymentID` int NOT NULL,
+  `paymentType` varchar(100) DEFAULT NULL,
+  `cardName` varchar(100) DEFAULT NULL,
+  `cardNumber` varchar(100) DEFAULT NULL,
+  `cardExpiryDate` varchar(100) DEFAULT NULL,
+  `cardCvv` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`paymentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
