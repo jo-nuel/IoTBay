@@ -22,7 +22,7 @@ public class CustomerManagementServlet extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
-        CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDao");
+        CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
         try {
             ArrayList<Customer> customers = customerDAO.getAllCustomers();
