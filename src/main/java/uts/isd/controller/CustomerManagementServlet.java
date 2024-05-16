@@ -18,7 +18,7 @@ import uts.isd.model.dao.CustomerDAO;
 public class CustomerManagementServlet extends HttpServlet{
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 

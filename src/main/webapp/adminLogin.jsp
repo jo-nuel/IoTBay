@@ -21,7 +21,9 @@
     <% if (adminUserName != null || adminPassword != null){
         if (adminUserName.equals("admin") && adminPassword.equals("secret"))  {  %>
             <h1 style="color: white;">Choose Admin Option</h1>
-            <button type="button" onclick="location.href='customerManagement.jsp';">Customer Management</button>
+            <form method="POST" action="/CustomerManagementServlet">
+                <button type="submit">Management</button>
+            </form>
             <button type="button" onclick="location.href='supplierManagement.jsp';">Supplier Management</button>
         <% } else { %>
             <h1 style="color: white;">IoTBay Admin Login</h1>  
