@@ -80,8 +80,8 @@ public class CustomerDAO {
 
     public void updateCustomer(int _userID, String _userName, String _userEmail, String _password, String _userType, 
             String _customerType, String _shippingAddress, boolean _accountActive) throws SQLException {
-        String updateUserString = "UPDATE user SET (userName, userEmail, password, userType) VALUES (?, ?, ?, ?) where userID = ?";
-        String updateCustomerString = "UPDATE customer SET (customerType, shippingAddress, accountActive) VALUES (?, ?, ?) where userID = ?";
+        String updateUserString = "UPDATE user SET userName = ? , userEmail = ?, password = ?, userType = ? where userID = ?";
+        String updateCustomerString = "UPDATE customer SET customerType = ?, shippingAddress = ?, accountActive = ? where userID = ?";
 
         try {
             PreparedStatement updateUser = conn.prepareStatement(updateUserString);
