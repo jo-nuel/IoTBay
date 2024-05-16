@@ -1,14 +1,14 @@
 package uts.unit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import uts.isd.model.Payment;
 import uts.isd.model.dao.PaymentDAO;
@@ -16,12 +16,12 @@ import uts.isd.model.dao.PaymentDAO;
 public class paymentdaotest {
     private PaymentDAO paymentDAO;
 
-    @Before
+    @BeforeEach
     public void setUp() throws SQLException, ClassNotFoundException {
         paymentDAO = new PaymentDAO();
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws SQLException {
         paymentDAO.close();
     }
