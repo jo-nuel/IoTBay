@@ -89,12 +89,12 @@ public class PaymentDAO {
         }
     }
 
-    public ArrayList<Payment> getPayments(int userID) throws SQLException {
+    public ArrayList<Payment> getPayments(String userID) throws SQLException {
         ArrayList<Payment> payments = new ArrayList<>();
         String sql = "SELECT * FROM payments WHERE userID = ?";
         
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, userID);
+            stmt.setInt(1, Integer.valueOf(userID));
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     int paymentID = rs.getInt("paymentID");

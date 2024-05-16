@@ -41,7 +41,7 @@ public class customerDAOTest {
         assertNotNull(customers);
         assertEquals(1, newSize - oldSize);
         // Verify the added customer
-        Customer customer = customers.get(0);
+        Customer customer = customers.get(customers.size()-1);
         assertEquals("TestName", customer.getUserName());
         assertEquals("test@email", customer.getUserEmail());
         assertEquals("1234", customer.getPassword());
@@ -59,22 +59,22 @@ public class customerDAOTest {
         ArrayList<Customer> customers = customerDAO.getAllCustomers();
         int oldListSize = customers.size();
         Customer lastAdded = customers.get(customers.size() - 1);
-        int ID = lastAdded.getUserID();
+        String ID = lastAdded.getUserID();
         // Delete customer with ID
         customerDAO.deleteCustomer(ID);
         // Check that list has original size before adding
-        assertEquals(oldListSize, customerDAO.getAllCustomers().size());
+        assertEquals(oldListSize - 1, customerDAO.getAllCustomers().size());
     }
 
     @Test
-    public void testUpdatePaymentDetails() throws SQLException {
+    public void testUpdateCustomer() throws SQLException {
         //Add new customer
         customerDAO.AddCustomer("TestName", "test@email", "1234", "Customer", "Individual", "Test");
 
         //Get added customer ID
         ArrayList<Customer> customers = customerDAO.getAllCustomers();
         Customer lastAdded = customers.get(customers.size() - 1);
-        int ID = lastAdded.getUserID();
+        String ID = lastAdded.getUserID();
 
         //Update customer details using ID
         customerDAO.updateCustomer(ID, "SecondName", "newEmail", "4321", "Customer", "Company", "Test2", false);

@@ -26,6 +26,7 @@ public class CustomerDAO {
             ResultSet rs = getCustomers.executeQuery();
 
             while (rs.next()){
+                String userID = rs.getString(1);
                 String username = rs.getString(2);
                 String email = rs.getString(3);
                 String password = rs.getString(4);
@@ -34,7 +35,7 @@ public class CustomerDAO {
                 String shippingAddress = rs.getString(7);
                 Boolean active = rs.getBoolean(8);
 
-                Customer customer = new Customer(username, email, password, usertype, custtype, shippingAddress, active);
+                Customer customer = new Customer(userID, username, email, password, usertype, custtype, shippingAddress, active);
                 customers.add(customer);
             }
         }
@@ -64,6 +65,8 @@ public class CustomerDAO {
             //Get last primary key inserted to make customer record
             PreparedStatement getID = conn.prepareStatement(getIDString);
             ResultSet rs = getID.executeQuery();
+            rs.next();
+            System.out.println(rs.getInt(1));
             int userID = rs.getInt(1);
 
             PreparedStatement makeCustomer = conn.prepareStatement(makeCustomerString);
@@ -78,7 +81,7 @@ public class CustomerDAO {
         }
     }
 
-    public void updateCustomer(int _userID, String _userName, String _userEmail, String _password, String _userType, 
+    public void updateCustomer(String _userID, String _userName, String _userEmail, String _password, String _userType, 
             String _customerType, String _shippingAddress, boolean _accountActive) throws SQLException {
         String updateUserString = "UPDATE user SET userName = ? , userEmail = ?, password = ?, userType = ? where userID = ?";
         String updateCustomerString = "UPDATE customer SET customerType = ?, shippingAddress = ?, accountActive = ? where userID = ?";
@@ -89,14 +92,14 @@ public class CustomerDAO {
             updateUser.setString(2, _userEmail);
             updateUser.setString(3, _password);
             updateUser.setString(4, _userType);
-            updateUser.setInt(5, _userID);
+            updateUser.setInt(5, Integer.valueOf(_userID));
             updateUser.executeUpdate();
 
             PreparedStatement updateCustomer = conn.prepareStatement(updateCustomerString);
             updateCustomer.setString(1, _customerType);
             updateCustomer.setString(2, _shippingAddress);
             updateCustomer.setBoolean(3,_accountActive);
-            updateCustomer.setInt(4, _userID);
+            updateCustomer.setInt(4, Integer.valueOf(_userID));
             updateCustomer.executeUpdate();
         }
         finally {
@@ -105,18 +108,17 @@ public class CustomerDAO {
     }
 
     // Delete a customer
-    public void deleteCustomer(int userID) throws SQLException {
-        String sql = "DELETE FROM ? WHERE userID = ?";
+    public void deleteCustomer(String userID) throws SQLException {
+        String usersql = "DELETE FROM user WHERE userID = ?";
+        String customersql = "DELETE FROM customer WHERE userID = ?";
         try {
-            PreparedStatement deleteUser = conn.prepareStatement(sql);
-            deleteUser.setString(1, "user");
-            deleteUser.setInt(2, userID);
-            deleteUser.executeUpdate();
-
-            PreparedStatement deleteCustomer = conn.prepareStatement(sql);
-            deleteCustomer.setString(1, "customer");
-            deleteCustomer.setInt(2, userID);
+            PreparedStatement deleteCustomer = conn.prepareStatement(customersql);
+            deleteCustomer.setInt(1, Integer.valueOf(userID));
             deleteCustomer.executeUpdate();
+
+            PreparedStatement deleteUser = conn.prepareStatement(usersql);
+            deleteUser.setInt(1, Integer.valueOf(userID));
+            deleteUser.executeUpdate();
         }
         finally {
 

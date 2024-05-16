@@ -26,12 +26,13 @@ public class SupplierDAO {
             ResultSet rs = getSuppliers.executeQuery();
 
             while (rs.next()) {
+                String supplierID = rs.getString(1);
                 String supplierName = rs.getString(2);
                 String emailAddress = rs.getString(3);
                 String phoneNum = rs.getString(4);
                 Boolean recordActive = rs.getBoolean(5);
 
-                Supplier supplier = new Supplier(supplierName, emailAddress, phoneNum, recordActive);
+                Supplier supplier = new Supplier(supplierID, supplierName, emailAddress, phoneNum, recordActive);
                 suppliers.add(supplier);
             }
         } finally {

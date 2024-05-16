@@ -24,7 +24,7 @@ public class DeleteCustomerServlet extends HttpServlet{
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
         try {
-            customerDAO.deleteCustomer(Integer.valueOf(customerID));
+            customerDAO.deleteCustomer(customerID);
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
             response.sendRedirect("customermanagement.jsp"); // Refresh management page

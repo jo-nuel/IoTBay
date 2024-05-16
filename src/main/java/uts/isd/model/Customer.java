@@ -5,8 +5,8 @@ public class Customer extends User {
     private String shippingAddress;
     private boolean accountActive;
 
-    public Customer(String _userName, String _userEmail, String _password, String _userType, String _customerType, String _shippingAddress, boolean _accountActive) {
-        super(_userName, _userEmail, _password, _userType);
+    public Customer(String _userID, String _userName, String _userEmail, String _password, String _userType, String _customerType, String _shippingAddress, boolean _accountActive) {
+        super(_userID, _userName, _userEmail, _password, _userType);
         this.customerType = _customerType;
         this.shippingAddress = _shippingAddress;
         this.accountActive = _accountActive;

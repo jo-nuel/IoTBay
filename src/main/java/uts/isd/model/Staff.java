@@ -5,8 +5,8 @@ import java.util.Date;
 public class Staff extends User {
     private Date empDate;
 
-    public Staff(String email, String username, String password, Date empDate) {
-        super(email, username, password, password);
+    public Staff(String userID, String email, String username, String password, Date empDate) {
+        super(userID, email, username, password, password);
         this.empDate = empDate;
     }
 

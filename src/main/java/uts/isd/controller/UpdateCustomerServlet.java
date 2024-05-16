@@ -40,7 +40,7 @@ public class UpdateCustomerServlet extends HttpServlet{
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
         try {
-            customerDAO.updateCustomer(Integer.valueOf(customerID), name, email, password, usertype, customertype, shippingaddress, active);
+            customerDAO.updateCustomer(customerID, name, email, password, usertype, customertype, shippingaddress, active);
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
             response.sendRedirect("customermanagement.jsp"); // Refresh management page

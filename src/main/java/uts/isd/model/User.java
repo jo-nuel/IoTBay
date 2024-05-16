@@ -3,7 +3,7 @@ package uts.isd.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	private int userID;
+	private String userID;
 	private String userName;
 	private String userEmail;
 	private String password;
@@ -12,13 +12,14 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(String _userName, String _userEmail, String _password, String _userType) {
+	public User(String _userID, String _userName, String _userEmail, String _password, String _userType) {
+		this.userID = _userID;
 		this.userName = _userName;
 		this.userEmail = _userEmail;
 		this.password = _password;
 		this.userType = _userType;
 	}
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
