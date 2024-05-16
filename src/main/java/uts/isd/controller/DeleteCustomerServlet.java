@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uts.isd.model.Customer;
 import uts.isd.model.dao.CustomerDAO;
 
 public class DeleteCustomerServlet extends HttpServlet{
@@ -18,11 +19,11 @@ public class DeleteCustomerServlet extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
-        String customerID = request.getParameter("customerID"); // Get ID to be deleted
+        Customer selectedCustomer = (Customer) session.getAttribute("selectedCustomer"); // Get ID to be deleted
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
         try {
-            customerDAO.deleteCustomer(customerID);
+            customerDAO.deleteCustomer(selectedCustomer.getUserID());
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
             response.sendRedirect("customermanagement.jsp"); // Refresh management page

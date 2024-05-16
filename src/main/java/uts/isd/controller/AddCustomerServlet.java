@@ -18,17 +18,16 @@ public class AddCustomerServlet extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
-        String name = request.getParameter("userName");
-        String email = request.getParameter("userEmail");
-        String password = request.getParameter("password");
-        String usertype = request.getParameter("userType");
+        String name = request.getParameter("customerName");
+        String email = request.getParameter("customerEmail");
+        String password = request.getParameter("customerPassword");
         String customertype = request.getParameter("customerType");
-        String shippingaddress = request.getParameter("shippingAddress");
+        String shippingaddress = request.getParameter("customerAddress");
 
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
         try {
-            customerDAO.AddCustomer(name, email, password, usertype, customertype, shippingaddress);
+            customerDAO.AddCustomer(name, email, password, "Customer", customertype, shippingaddress);
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
             response.sendRedirect("customermanagement.jsp"); // Refresh management page

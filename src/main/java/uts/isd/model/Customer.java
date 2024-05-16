@@ -13,7 +13,7 @@ public class Customer extends User {
     }
 
     public String getCustomerType() {
-        return customerType;
+        return this.customerType;
     }
 
     public void setCustomerType(String customerType) {
@@ -21,7 +21,7 @@ public class Customer extends User {
     }
 
     public String getShippingAddress() {
-        return shippingAddress;
+        return this.shippingAddress;
     }
 
     public void setShippingAddress(String shippingAddress) {
@@ -29,7 +29,16 @@ public class Customer extends User {
     }
 
     public boolean isAccountActive() {
-        return accountActive;
+        return this.accountActive;
+    }
+
+    public String activeString() {
+        if (this.accountActive) {
+            return "True";
+        }
+        else {
+            return "False";
+        }
     }
 
     public void setAccountActive(boolean accountActive) {

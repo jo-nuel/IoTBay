@@ -25,6 +25,7 @@
                 <button type="submit">Customer Management</button>
             </form>
             <button type="button" onclick="location.href='supplierManagement.jsp';">Supplier Management</button>
+            <button type="button" onclick="location.href='login.jsp';">Exit</button>
         <% } else { %>
             <h1 style="color: white;">IoTBay Admin Login</h1>  
             <form class="login-form">
@@ -36,6 +37,8 @@
                 <input type="password" name="adminPassword" id="adminPassword" required>
 
                 <button type="submit">Login</button>
+
+                <button type="button" onclick="location.href='login.jsp';">Exit</button>
             </form>  
         <% } %>
 
@@ -49,6 +52,8 @@
             <input type="password" name="adminPassword" id="adminPassword" required>
 
             <button type="submit">Login</button>
+
+            <button type="button" onclick="location.href='login.jsp';">Exit</button>
         </form>  
     <% } %> 
 

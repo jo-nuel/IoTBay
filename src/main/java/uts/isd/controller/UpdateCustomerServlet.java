@@ -19,16 +19,15 @@ public class UpdateCustomerServlet extends HttpServlet{
         HttpSession session = request.getSession();
 
         String customerID = request.getParameter("customerID"); // Get ID to be updated
-        String name = request.getParameter("userName");
-        String email = request.getParameter("userEmail");
-        String password = request.getParameter("password");
-        String usertype = request.getParameter("userType");
+        String name = request.getParameter("customerName");
+        String email = request.getParameter("customerEmail");
+        String password = request.getParameter("customerPassword");
         String customertype = request.getParameter("customerType");
-        String shippingaddress = request.getParameter("shippingAddress");
-        String activestatus = request.getParameter("activeStatus");
+        String shippingaddress = request.getParameter("customerAddress");
+        String activestatus = request.getParameter("accountActive");
         Boolean active;
 
-        if (activestatus.equals("True")) {
+        if (activestatus.equals("Active")) {
             active = true;
         }
         else {
@@ -38,7 +37,7 @@ public class UpdateCustomerServlet extends HttpServlet{
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
         try {
-            customerDAO.updateCustomer(customerID, name, email, password, usertype, customertype, shippingaddress, active);
+            customerDAO.updateCustomer(customerID, name, email, password, "Customer", customertype, shippingaddress, active);
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
             response.sendRedirect("customermanagement.jsp"); // Refresh management page
