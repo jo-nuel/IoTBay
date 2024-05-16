@@ -68,23 +68,28 @@ public class customerDAOTest {
 
     @Test
     public void testUpdatePaymentDetails() throws SQLException {
+        //Add new customer
         customerDAO.AddCustomer("TestName", "test@email", "1234", "Customer", "Individual", "Test");
 
+        //Get added customer ID
         ArrayList<Customer> customers = customerDAO.getAllCustomers();
         Customer lastAdded = customers.get(customers.size() - 1);
         int ID = lastAdded.getUserID();
 
+        //Update customer details using ID
         customerDAO.updateCustomer(ID, "SecondName", "newEmail", "4321", "Customer", "Company", "Test2", false);
 
-        ArrayList<Customer> newCustomers = customerDAO.getAllCustomers();
+        //Refresh customer list and get updated customer
+        customers = customerDAO.getAllCustomers();
         Customer updatedCustomer = customers.get(customers.size() - 1);
 
-        assertEquals("TestName", updatedCustomer.getUserName());
-        assertEquals("test@email", updatedCustomer.getUserEmail());
-        assertEquals("1234", updatedCustomer.getPassword());
+        //Check that all values have been updated
+        assertEquals("SecondName", updatedCustomer.getUserName());
+        assertEquals("newEmail", updatedCustomer.getUserEmail());
+        assertEquals("4321", updatedCustomer.getPassword());
         assertEquals("Customer", updatedCustomer.getUserType());
-        assertEquals("Individual", updatedCustomer.getCustomerType());
-        assertEquals("Test", updatedCustomer.getShippingAddress());
+        assertEquals("Company", updatedCustomer.getCustomerType());
+        assertEquals("Test2", updatedCustomer.getShippingAddress());
         assertFalse(updatedCustomer.isAccountActive());
     }
 }
