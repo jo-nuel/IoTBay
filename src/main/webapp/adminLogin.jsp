@@ -27,11 +27,11 @@
             <h1 style="color: white;">IoTBay Admin Login</h1>
             <p>Incorrect Username or Password.</p>
             <form class="login-form">
-                <label for="Username">Username:</label>
-                <input type="text" name="username" id="Username" required>
+                <label for="adminUserName">Username:</label>
+                <input type="text" name="adminUserName" id="adminUserName" required>
                         
-                <label for="Password">Password:</label>
-                <input type="password" name="password" id="Password" required>
+                <label for="adminPassword">Password:</label>
+                <input type="password" name="adminPassword" id="adminPassword" required>
 
                 <button type="submit">Login</button>
             </form>  
@@ -40,11 +40,11 @@
     <% } else { %>
         <h1 style="color: white;">IoTBay Admin Login</h1>
         <form class="login-form">
-            <label for="Username">Username:</label>
-            <input type="text" name="username" id="Username" required>
+            <label for="adminUserName">Username:</label>
+            <input type="text" name="adminUserName" id="adminUserName" required>
                     
-            <label for="Password">Password:</label>
-            <input type="password" name="password" id="Password" required>
+            <label for="adminPassword">Password:</label>
+            <input type="password" name="adminPassword" id="adminPassword" required>
 
             <button type="submit">Login</button>
         </form>  
