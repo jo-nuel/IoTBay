@@ -85,4 +85,70 @@
     <servlet-name>ViewPaymentHistoryServlet</servlet-name>
     <url-pattern>/ViewPaymentHistoryServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ConnServlet</servlet-name>
+    <servlet-class>uts.isd.controller.ConnServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConnServlet</servlet-name>
+    <url-pattern>/ConnServlet</url-pattern>
+  </servlet-mapping>
+	<servlet>
+		<servlet-name>BrowseDeviceServlet</servlet-name>
+		<servlet-class>uts.isd.controller.BrowseDeviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BrowseDeviceServlet</servlet-name>
+		<url-pattern>/BrowseDeviceServlet</url-pattern>
+	</servlet-mapping>
+	<!-- Servlet for searching devices -->
+	<servlet>
+		<servlet-name>SearchDeviceServlet</servlet-name>
+		<servlet-class>uts.isd.controller.SearchDeviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchDeviceServlet</servlet-name>
+		<url-pattern>/SearchDeviceServlet</url-pattern>
+	</servlet-mapping>
+	<!-- Servlet for adding a device -->
+	<servlet>
+		<servlet-name>AddDeviceServlet</servlet-name>
+		<servlet-class>uts.isd.controller.AddDeviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddDeviceServlet</servlet-name>
+		<url-pattern>/AddDeviceServlet</url-pattern>
+	</servlet-mapping>
+	<!-- Servlet for editing a device -->
+	<servlet>
+		<servlet-name>UpdateDeviceServlet</servlet-name>
+		<servlet-class>uts.isd.controller.UpdateDeviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateDeviceServlet</servlet-name>
+		<url-pattern>/UpdateDeviceServlet</url-pattern>
+	</servlet-mapping>
+	<!-- Servlet for deleting a device -->
+	<servlet>
+		<servlet-name>DeleteDeviceServlet</servlet-name>
+		<servlet-class>uts.isd.controller.DeleteDeviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteDeviceServlet</servlet-name>
+		<url-pattern>/DeleteDeviceServlet</url-pattern>
+	</servlet-mapping>
+  <servlet>
+    <servlet-name>ViewDeviceServlet</servlet-name>
+    <servlet-class>uts.isd.controller.ViewDeviceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>ViewDeviceServlet</servlet-name>
+      <url-pattern>/ViewDeviceServlet</url-pattern>
+  </servlet-mapping>
+  <multipart-config>
+    <max-file-size>10485760</max-file-size>
+    <max-request-size>20971520</max-request-size>
+    <file-size-threshold>5242880</file-size-threshold>
+  </multipart-config>
 </web-app>

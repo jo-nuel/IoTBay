@@ -3,32 +3,38 @@ package uts.isd.model;
 import java.io.Serializable;
 
 public class Device implements Serializable {
-    private String deviceID;
+    private int deviceID;
     private String deviceName;
     private Double devicePrice;
     private String deviceDesc;
     private int deviceStock;
-    private String deviceStatus;
     private boolean deviceAvailability;
-    private String[] deviceCategory;
+    private String deviceCategory;
+    private String deviceBrand;
+    private String deviceImageURL;
 
-    public Device(String deviceID, String deviceName, double devicePrice, String deviceDesc, int deviceStock,
-            String deviceStatus, boolean deviceAvailability, String[] deviceCategory) {
+    public Device() {
+
+    }
+
+    public Device(int deviceID, String deviceName, double devicePrice, String deviceDesc, int deviceStock,
+            boolean deviceAvailability, String deviceCategory, String deviceBrand, String deviceImageURL) {
         this.deviceID = deviceID;
         this.deviceName = deviceName;
         this.devicePrice = devicePrice;
         this.deviceDesc = deviceDesc;
         this.deviceStock = deviceStock;
-        this.deviceStatus = deviceStatus;
         this.deviceAvailability = deviceAvailability;
         this.deviceCategory = deviceCategory;
+        this.deviceBrand = deviceBrand;
+        this.deviceImageURL = deviceImageURL;
     }
 
-    public String getDeviceID() {
+    public int getDeviceID() {
         return deviceID;
     }
 
-    public void setDeviceID(String deviceID) {
+    public void setDeviceID(int deviceID) {
         this.deviceID = deviceID;
     }
 
@@ -64,14 +70,6 @@ public class Device implements Serializable {
         this.deviceStock = deviceStock;
     }
 
-    public String getDeviceStatus() {
-        return deviceStatus;
-    }
-
-    public void setDeviceStatus(String deviceStatus) {
-        this.deviceStatus = deviceStatus;
-    }
-
     public boolean isDeviceAvailability() {
         return deviceAvailability;
     }
@@ -80,11 +78,27 @@ public class Device implements Serializable {
         this.deviceAvailability = deviceAvailability;
     }
 
-    public String[] getDeviceCategory() {
+    public String getDeviceCategory() {
         return deviceCategory;
     }
 
-    public void setDeviceCategory(String[] deviceCategory) {
+    public void setDeviceCategory(String deviceCategory) {
         this.deviceCategory = deviceCategory;
+    }
+
+    public String getDeviceBrand() {
+        return deviceBrand;
+    }
+
+    public void setDeviceBrand(String deviceBrand) {
+        this.deviceBrand = deviceBrand;
+    }
+
+    public String getDeviceImageURL() {
+        return deviceImageURL;
+    }
+
+    public void setDeviceImageURL(String deviceImageURL) {
+        this.deviceImageURL = deviceImageURL;
     }
 }

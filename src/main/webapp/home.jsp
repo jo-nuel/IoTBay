@@ -64,7 +64,7 @@
                 </section>
             </main>
             <footer>
-                <p></p>
+                <button type="button" onclick="location.href='deviceCatalogue.jsp';">Go to catalogue</button>
             </footer>
         <% } %>
     </body>
