@@ -12,11 +12,13 @@ import javax.servlet.http.HttpSession;
 
 import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.UserDao;
+import uts.isd.model.dao.CustomerDAO;;
 
 public class ConnServlet extends HttpServlet {
 
     private DBConnector db;
     private UserDao userDAO;
+    private CustomerDAO customerDAO;
     private Connection conn;
 
     @Override
@@ -36,12 +38,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     try {
         db = new DBConnector(); // Create an instance of DBConnector
         conn = db.openConnection(); // Call openConnection() on the instance of DBConnector
+        customerDAO = new CustomerDAO(conn);
         userDAO = new UserDao(conn);
     } catch (SQLException | ClassNotFoundException e) {
         System.out.print(e);
     }
 
     session.setAttribute("userDAO", userDAO);
+    session.setAttribute("customerDAO", customerDAO);
     request.getRequestDispatcher("index.jsp").include(request, response);
 }
 
