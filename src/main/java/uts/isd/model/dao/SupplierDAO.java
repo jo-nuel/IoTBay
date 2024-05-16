@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import uts.isd.model.Supplier;
 
@@ -18,72 +16,91 @@ public class SupplierDAO {
         connection.setAutoCommit(true);
     }
 
-    public void addSupplier(Supplier supplier) throws SQLException {
-        String sql = "INSERT INTO supplier (supplierID, supplierName, emailAddress, phoneNum, recordActive) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, supplier.getsupplierID());
-            statement.setString(2, supplier.getsupplierName());
-            statement.setString(3, supplier.getemailAddress());
-            statement.setString(4, supplier.getphoneNum());
-            statement.setBoolean(5, supplier.isrecordActive());
-            statement.executeUpdate();
+    public ArrayList<Supplier> getAllSuppliers() throws SQLException {
+        String getSupplier = "SELECT supplier.supplierID, supplier.supplierName, supplier.emailAddress, supplier.phoneNum, supplier.recordActive FROM supplier";
+
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+
+        try {
+            PreparedStatement getSuppliers = conn.prepareStatement(getSupplier);
+            ResultSet rs = getSuppliers.executeQuery();
+
+            while (rs.next()) {
+                String supplierName = rs.getString(2);
+                String emailAddress = rs.getString(3);
+                String phoneNum = rs.getString(4);
+                Boolean recordActive = rs.getBoolean(5);
+
+                Supplier supplier = new Supplier(supplierName, emailAddress, phoneNum, recordActive);
+                suppliers.add(supplier);
+            }
+        } finally {
+
+        }
+
+        return suppliers;
+    }
+
+    // Add new supplier
+    public void addSupplier(String _supplierName, String _emailAddress, String _phoneNum) throws SQLException {
+
+        String makeSupplierString = "INSERT INTO supplier (supplierName, emailAddress, phoneNum, recordActive) VALUES (?, ?, ?, ?)";
+
+        try {
+
+            PreparedStatement makeSupplier = conn.prepareStatement(makeSupplierString);
+            makeSupplier.setString(1, _supplierName);
+            makeSupplier.setString(2, _emailAddress);
+            makeSupplier.setString(3, _phoneNum);
+            makeSupplier.setBoolean(4, true);
+            makeSupplier.executeUpdate();
+        } finally {
+
         }
     }
 
-    // Update an existing supplier
-    public void updateSupplier(Supplier supplier) throws SQLException {
-        String sql = "UPDATE supplier SET supplierName = ?, emailAddress = ?, phoneNum = ?, recordActive = ? WHERE supplierID = ?";
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(2, supplier.getsupplierName());
-            statement.setString(3, supplier.getemailAddress());
-            statement.setString(4, supplier.getphoneNum());
-            statement.setBoolean(5, supplier.isrecordActive());
-            statement.executeUpdate();
+    // Change a supplier
+    public void changeSupplier(int _supplierID, String _supplierName, String _emailAddress, String _phoneNum)
+            throws SQLException {
+        String updateSupplierString = "UPDATE supplier SET supplierName = ?, emailAddress = ?, phoneNum = ? WHERE supplierID = ?";
+
+        try {
+            PreparedStatement updateSupplier = conn.prepareStatement(updateSupplierString);
+
+            updateSupplier.setString(1, _supplierName);
+            updateSupplier.setString(2, _emailAddress);
+            updateSupplier.setString(3, _phoneNum);
+            updateSupplier.setInt(4, _supplierID);
+            updateSupplier.executeUpdate();
+        } finally {
+
+        }
+    }
+
+    // Update a supplier statu
+    public void updateSupplier(int _supplierID, boolean _recordActive) throws SQLException {
+        String updateSupplierString = "UPDATE supplier SET recordActive = ? WHERE supplierID = ?";
+
+        try {
+            PreparedStatement updateSupplier = conn.prepareStatement(updateSupplierString);
+
+            updateSupplier.setBoolean(1, _recordActive);
+            updateSupplier.setInt(2, _supplierID);
+            updateSupplier.executeUpdate();
+        } finally {
+
         }
     }
 
     // Delete a supplier
-    public void deletec(String supplierID) throws SQLException {
+    public void deleteSupplier(int supplierID) throws SQLException {
         String sql = "DELETE FROM supplier WHERE supplierID = ?";
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, supplierID);
-            statement.executeUpdate();
-        }
-    }
+        try {
+            PreparedStatement deleteSupplier = conn.prepareStatement(sql);
+            deleteSupplier.setInt(1, supplierID);
+            deleteSupplier.executeUpdate();
+        } finally {
 
-    // Find a single supplier by ID
-    public Supplier getSupplier(String supplierID) throws SQLException {
-        String sql = "SELECT * FROM supplier WHERE supplierID = ?";
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, supplierID);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new Supplier(
-                        resultSet.getString("supplierID"),
-                        resultSet.getString("supplierName"),
-                        resultSet.getString("emailAddress"),
-                        resultSet.getString("phoneNum"),
-                        resultSet.getBoolean("recordActive"));
-            }
         }
-        return null;
-    }
-
-    // Display all suppliers
-    public List<Supplier> getAllSupplier() throws SQLException {
-        List<Supplier> suppliers = new ArrayList<>();
-        String sql = "SELECT * FROM supplier";
-        try (Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql)) {
-            while (resultSet.next()) {
-                suppliers.add(new Supplier(
-                    resultSet.getString("supplierID"),
-                    resultSet.getString("supplierName"),
-                    resultSet.getString("emailAddress"),
-                    resultSet.getString("phoneNum"),
-                    resultSet.getBoolean("recordActive")));
-            }
-        }
-        return suppliers;
     }
 }
