@@ -22,7 +22,7 @@
         if (adminUserName.equals("admin") && adminPassword.equals("secret"))  {  %>
             <h1 style="color: white;">Choose Admin Option</h1>
             <form method="POST" action="/CustomerManagementServlet">
-                <button type="submit">Management</button>
+                <button type="submit">Customer Management</button>
             </form>
             <button type="button" onclick="location.href='supplierManagement.jsp';">Supplier Management</button>
         <% } else { %>

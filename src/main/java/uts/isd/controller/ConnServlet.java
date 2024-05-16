@@ -38,14 +38,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     try {
         db = new DBConnector(); // Create an instance of DBConnector
         conn = db.openConnection(); // Call openConnection() on the instance of DBConnector
-        //customerDAO = new CustomerDAO(conn);
-        //userDAO = new UserDao(conn);
+        customerDAO = new CustomerDAO(conn);
+        userDAO = new UserDao(conn);
     } catch (SQLException | ClassNotFoundException e) {
         System.out.print(e);
     }
 
-    //session.setAttribute("userDAO", userDAO);
-    //session.setAttribute("customerDAO", customerDAO);
+    session.setAttribute("userDAO", userDAO);
+    session.setAttribute("customerDAO", customerDAO);
     request.getRequestDispatcher("login.jsp").include(request, response);
 }
 
