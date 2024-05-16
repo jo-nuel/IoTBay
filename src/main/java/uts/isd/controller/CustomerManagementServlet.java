@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import uts.isd.model.Customer;
 import uts.isd.model.dao.CustomerDAO;
 
-@WebServlet("/CustomerManagementServlet")
 public class CustomerManagementServlet extends HttpServlet{
 
     @Override
