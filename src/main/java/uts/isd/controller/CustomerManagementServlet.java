@@ -27,7 +27,7 @@ public class CustomerManagementServlet extends HttpServlet{
 
             session.setAttribute("customers", customers);
 
-            request.getRequestDispatcher("customerManagement.jsp").include(request, response);
+            response.sendRedirect("customerManagement.jsp");
         }
         catch (SQLException e){
             System.out.println(e);

@@ -25,7 +25,6 @@
                 if (customer.getUserID().equals(selectedID)) {
                     selectedCustomer = customer;
                     session.setAttribute("selectedCustomer", selectedCustomer);
-                    s
                 }
             }
         }
@@ -80,10 +79,7 @@
 
             <button type="submit">Confirm</button>
         <% } %>
-
-        <form method="POST" action="/CustomerManagementServlet">
-            <button type="submit">Cancel</button>
-        </form>
     </form>
+    <button type="button" onclick="location.href='customerManagement.jsp';">Cancel</button>
 </body>
 </html>

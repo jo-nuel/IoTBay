@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="uts.isd.model.*"%>
 
 <!DOCTYPE html>
@@ -23,19 +24,21 @@
             <label for="searchName">Customer Name:</label>
             <input type="text" name="searchName" id="searchName">
 
+            <br>
+
             <input type="checkbox" id="Individual" name="Individual" value="Individual">
             <label for="Individual"> Individuals</label><br>
 
             <input type="checkbox" id="Company" name="Company" value="Company">
             <label for="Company"> Companies</label><br>
 
-            <button type="submit">Login</button>
+            <button type="submit">Search</button>
         </form>
 
         <% 
             ArrayList<Customer> customers = (ArrayList<Customer>) session.getAttribute("customers");
             String searchName = request.getParameter("searchName");
-            String individual = request.getParamter("Individual");
+            String individual = request.getParameter("Individual");
             String company = request.getParameter("Company");
         %>
 
@@ -57,7 +60,7 @@
                     <td><%=customer.getPassword()%></td>
                     <td><%=customer.getCustomerType()%></td>
                     <td><%=customer.getShippingAddress()%></td>
-                    <td><%=customer.getActiveString()%></td>
+                    <td><%=customer.activeString()%></td>
                 </tr>
             <% } %>
         </table>
