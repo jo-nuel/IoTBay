@@ -91,13 +91,12 @@
       <max-file-size>1048576</max-file-size>
       <max-request-size>1048576</max-request-size>
       <file-size-threshold>1024</file-size-threshold>
-    </multipart-config>
+  </multipart-config>
   </servlet>
 	<servlet-mapping>
 		<servlet-name>UpdateDeviceServlet</servlet-name>
 		<url-pattern>/UpdateDeviceServlet</url-pattern>
 	</servlet-mapping>
-	<!-- Servlet for deleting a device -->
 	<servlet>
 		<servlet-name>DeleteDeviceServlet</servlet-name>
 		<servlet-class>uts.isd.controller.DeleteDeviceServlet</servlet-class>

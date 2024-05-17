@@ -60,12 +60,12 @@
                 conn.close();
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
-                out.println("<p>Error retrieving device details.</p>");
+                out.println("Error retrieving device details.");
             }
 
             if (device != null) {
         %>
-        <form action="/UpdateDeviceServlet" method="post" class="form-control">
+        <form action="/UpdateDeviceServlet" method="post" class="form-control" enctype="multipart/form-data">
             <input type="hidden" name="deviceID" value="<%= device.getDeviceID() %>">
             <div class="mb-3">
                 <label for="deviceName" class="form-label">Device Name:</label>
@@ -98,7 +98,7 @@
                 <label for="deviceBrand" class="form-label">Brand:</label>
                 <input type="text" class="form-control" id="deviceBrand" name="deviceBrand" value="<%= device.getDeviceBrand() %>" required>
             </div>
-            <div class="mb-3">
+           <div class="mb-3">
                 <label for="deviceImage" class="form-label">Device Image:</label>
                 <input type="file" class="form-control" id="deviceImage" name="deviceImage">
                 <input type="hidden" name="deviceImageURL" value="<%= device.getDeviceImageURL() %>">

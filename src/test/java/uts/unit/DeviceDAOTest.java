@@ -43,12 +43,14 @@ public class DeviceDAOTest {
         assertTrue(devices.size() > 0);
     }
 
+    // Need to change the deviceID to the deviceID you want to update from the
+    // database
     @Test
     public void testUpdateDevice() throws SQLException {
-        deviceDAO.updateDevice(999, "Updated Test Device", 299.99,
+        deviceDAO.updateDevice(1025, "Updated Test Device", 299.99,
                 "Updated description", 15, true, "Updated Test",
                 "UpdatedBrand", "updatedUrl");
-        Device device = deviceDAO.findDevice(1016);
+        Device device = deviceDAO.findDevice(1025);
         assertEquals("Updated Test Device", device.getDeviceName());
     }
 

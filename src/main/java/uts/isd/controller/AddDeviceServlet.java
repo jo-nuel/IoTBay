@@ -4,7 +4,6 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import uts.isd.model.dao.DeviceDAO;
-import uts.isd.model.User;
-import uts.isd.model.Staff;
 import uts.isd.model.Device;
 
 public class AddDeviceServlet extends HttpServlet {
@@ -21,7 +18,6 @@ public class AddDeviceServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
 
         String deviceName = request.getParameter("deviceName");
         double devicePrice = Double.parseDouble(request.getParameter("devicePrice"));
@@ -36,10 +32,8 @@ public class AddDeviceServlet extends HttpServlet {
         String filePath = getServletContext().getRealPath("/images/") + File.separator + fileName;
 
         filePart.write(filePath);
-        String deviceImageURL = "/images/" + fileName;
+        String deviceImageURL = "images/" + fileName;
 
-        // Check if the user is a staff
-        // if (user != null && user instanceof Staff) {
         DeviceDAO deviceDAO = (DeviceDAO) session.getAttribute("deviceDAO");
         System.out.println("Fetched deviceDAO from session: " + deviceDAO);
 
@@ -70,11 +64,5 @@ public class AddDeviceServlet extends HttpServlet {
             System.out.println(e);
             response.sendRedirect("addDevice.jsp");
         }
-        /*
-         * } else {
-         * // Not a staff or user not logged in
-         * response.sendRedirect("login.jsp");
-         * }
-         */
     }
 }

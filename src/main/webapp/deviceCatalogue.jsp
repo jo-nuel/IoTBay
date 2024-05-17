@@ -122,7 +122,7 @@
         <div class="col-md-3">
             <a href="ViewDeviceServlet?id=<%= device.getDeviceID() %>">
                 <div class="device-card">
-                    <img src="<%= device.getDeviceImageURL() %>" alt="<%= device.getDeviceName() %>">
+                    <img src="<%= device.getDeviceImageURL() %>">
                     <h5><%= device.getDeviceName() %></h5>
                     <p><strong>Brand:</strong> <%= device.getDeviceBrand() %></p>
                     <p><strong>Price:</strong> $<%= device.getDevicePrice() %></p>
