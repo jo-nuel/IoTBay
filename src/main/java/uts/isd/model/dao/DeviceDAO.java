@@ -1,13 +1,14 @@
 package uts.isd.model.dao;
 
-import uts.isd.model.Device;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import uts.isd.model.Device;
 
 public class DeviceDAO {
     private Connection conn;
@@ -30,6 +31,19 @@ public class DeviceDAO {
             statement.setString(8, String.join(",", device.getDeviceCategory()));
             statement.executeUpdate();
         }
+    }
+
+    // Fetch distinct categories
+    public ArrayList<String> getCategories() throws SQLException {
+        ArrayList<String> categories = new ArrayList<>();
+        String sql = "SELECT DISTINCT deviceCategory FROM devices";
+        PreparedStatement st = conn.prepareStatement(sql);
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            categories.add(rs.getString(1));
+        }
+        return categories;
     }
 
     // Update an existing device
