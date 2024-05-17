@@ -51,3 +51,14 @@ CREATE TABLE `Payment` (
   `cardCvv` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`paymentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- iotbay.supplier definition
+
+CREATE TABLE `supplier` (
+  `supplierID` int AUTO_INCREMENT NOT NULL,
+  `supplierName` varchar(50) DEFAULT NULL,
+  `emailAddress` varchar(30) NULL,
+  `phoneNum` varchar(10) DEFAULT NULL,
+  `recordActive` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`supplierID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
