@@ -20,7 +20,7 @@
 
     <% if (adminUserName != null || adminPassword != null){
         if (adminUserName.equals("admin") && adminPassword.equals("secret"))  {  %>
-            <h1 style="color: white;">Choose Admin Option</h1>
+            <h1>Choose Admin Option</h1>
             <form method="GET" action="/CustomerManagementServlet">
                 <button type="submit">Customer Management</button>
             </form>
@@ -43,7 +43,7 @@
         <% } %>
 
     <% } else { %>
-        <h1 style="color: white;">IoTBay Admin Login</h1>
+        <h1>IoTBay Admin Login</h1>
         <form class="login-form">
             <label for="adminUserName">Username:</label>
             <input type="text" name="adminUserName" id="adminUserName" required>

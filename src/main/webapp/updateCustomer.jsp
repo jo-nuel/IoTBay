@@ -17,21 +17,21 @@
         Customer selectedCustomer = (Customer) session.getAttribute("selectedCustomer");
     %>
 
-    <h1 style="color: white;">Updating Customer</h1>
+    <h1>Updating Customer</h1>
     <form class="login-form" method="POST" action="/UpdateCustomerServlet">
 
         <label for="customerID">Customer ID:</label>
         <input type="number" name="customerID" id="customerID" readonly value="<%=Integer.valueOf(selectedCustomer.getUserID())%>">
-
+        <br>
         <label for="customerName">Name:</label>
         <input type="text" name="customerName" id="customerName" value="<%=selectedCustomer.getUserName()%>">
-
+        <br>
         <label for="customerEmail">Email:</label>
         <input type="text" name="customerEmail" id="customerEmail" value="<%=selectedCustomer.getUserEmail()%>">
-
+        <br>
         <label for="customerPassword">Password:</label>
         <input type="text" name="customerPassword" id="customerPassword" value="<%=selectedCustomer.getPassword()%>">
-
+        <br>
         <label for="customerUserType">User Type:</label>
         <input type="text" name="customerUserType" id="customerUserType" readonly value="<%=selectedCustomer.getUserType()%>">
 
@@ -77,7 +77,7 @@
             <label for="Inactive">Inactive</label><br>
 
         <% } %>
-
+            <br>
             <button type="submit">Save Changes</button>
     </form>
     <form method="GET" action="/CustomerManagementServlet">

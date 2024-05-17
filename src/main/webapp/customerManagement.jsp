@@ -26,10 +26,10 @@
 
             <br>
 
-            <input type="checkbox" id="Individual" name="Type" value="Individual">
+            <input type="checkbox" id="Individual" name="Individual" value="Individual">
             <label for="Individual"> Individuals</label><br>
 
-            <input type="checkbox" id="Company" name="Type" value="Company">
+            <input type="checkbox" id="Company" name="Company" value="Company">
             <label for="Company"> Companies</label><br>
 
             <button type="submit">Search</button>
@@ -40,6 +40,30 @@
             String searchName = request.getParameter("searchName");
             String individual = request.getParameter("Individual");
             String company = request.getParameter("Company");
+
+            ArrayList<Customer> filteredCustomers = (ArrayList<Customer>) customers.clone();
+
+            for (int i = 0; i < filteredCustomers.size(); i++){
+                Customer checkCustomer = filteredCustomers.get(i);
+                if (searchName != null && !checkCustomer.getUserName().startsWith(searchName)) {
+                    filteredCustomers.remove(i);
+                    i--;
+                    continue;
+                }
+                if (individual != null && company == null) {
+                    if (!checkCustomer.getCustomerType().equals(individual)) {
+                        filteredCustomers.remove(i);
+                        i--;
+                        continue;
+                    }    
+                }
+                if (individual == null && company != null) {
+                    if (!checkCustomer.getCustomerType().equals(company)) {
+                        filteredCustomers.remove(i);
+                        i--;
+                    }    
+                }
+            }
         %>
 
         <br>
@@ -54,30 +78,16 @@
                 <th>Address</th>
                 <th>Account Active</th>
             </tr>
-            <% for (Customer customer : customers) { %>
-                <% if (searchName != null) {
-                    if (customer.getUserName().startsWith(searchName)) { %>
-                        <tr>
-                            <td><%=customer.getUserID()%></td>
-                            <td><%=customer.getUserName()%></td>
-                            <td><%=customer.getUserEmail()%></td>
-                            <td><%=customer.getPassword()%></td>
-                            <td><%=customer.getCustomerType()%></td>
-                            <td><%=customer.getShippingAddress()%></td>
-                            <td><%=customer.activeString()%></td>
-                        </tr>
-                    <% } %>
-                <% } else { %>
-                    <tr>
-                        <td><%=customer.getUserID()%></td>
-                        <td><%=customer.getUserName()%></td>
-                        <td><%=customer.getUserEmail()%></td>
-                        <td><%=customer.getPassword()%></td>
-                        <td><%=customer.getCustomerType()%></td>
-                        <td><%=customer.getShippingAddress()%></td>
-                        <td><%=customer.activeString()%></td>
-                    </tr>
-                <% } %>
+            <% for (Customer customer : filteredCustomers) { %>
+                <tr>
+                    <td><%=customer.getUserID()%></td>
+                    <td><%=customer.getUserName()%></td>
+                    <td><%=customer.getUserEmail()%></td>
+                    <td><%=customer.getPassword()%></td>
+                    <td><%=customer.getCustomerType()%></td>
+                    <td><%=customer.getShippingAddress()%></td>
+                    <td><%=customer.activeString()%></td>
+                </tr>
             <% } %>
         </table>
     </body>

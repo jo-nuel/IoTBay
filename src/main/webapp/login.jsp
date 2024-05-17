@@ -38,7 +38,8 @@
         <% } else { %>
             <button type="submit">Login</button>
         <% } %>  
-        <button type="button" onclick="location.href='register.jsp';">Register</button> 
+        <button type="button" onclick="location.href='register.jsp';">Register</button>
+        <button type="button" onclick="location.href='adminLogin.jsp';">Admin Login</button> 
     </form>
 </body>
 </html>

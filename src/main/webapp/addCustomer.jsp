@@ -17,13 +17,13 @@
     <h1>Add A New Customer</h1>
     <form class="login-form" method="POST" action="/AddCustomerServlet">
         <label for="customerName">Name:</label>
-        <input type="text" name="customerName" id="customerName" required>
+        <input type="text" name="customerName" id="customerName" required><br>
 
         <label for="customerEmail">Email:</label>
-        <input type="text" name="customerEmail" id="customerEmail" required>
+        <input type="text" name="customerEmail" id="customerEmail" required><br>
 
         <label for="customerPassword">Password:</label>
-        <input type="password" name="customerPassword" id="customerPassword" required>
+        <input type="password" name="customerPassword" id="customerPassword" required><br>
 
         <label for="customerUserType">User Type:</label>
         <input type="text" name="customerUserType" id="customerUserType" readonly value="Customer">
@@ -39,7 +39,7 @@
         <label for="Company">Company</label><br>
 
         <label for="customerAddress">Shipping Address:</label>
-        <input type="text" name="customerAddress" id="customerAddress" required>
+        <input type="text" name="customerAddress" id="customerAddress" required><br>
 
         <button type="submit">Add Customer</button>
     </form>
