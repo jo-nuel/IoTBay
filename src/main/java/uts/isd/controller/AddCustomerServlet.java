@@ -30,9 +30,11 @@ public class AddCustomerServlet extends HttpServlet{
             customerDAO.AddCustomer(name, email, password, "Customer", customertype, shippingaddress);
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
-            response.sendRedirect("customermanagement.jsp"); // Refresh management page
+            response.sendRedirect("customerManagement.jsp"); // Refresh management page
         } catch (SQLException e) {
             e.printStackTrace(); // Handle database errors
         }
+
+        response.sendRedirect("customerManagement.jsp");
     }
 }

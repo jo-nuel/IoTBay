@@ -26,10 +26,10 @@
 
             <br>
 
-            <input type="checkbox" id="Individual" name="Individual" value="Individual">
+            <input type="checkbox" id="Individual" name="Type" value="Individual">
             <label for="Individual"> Individuals</label><br>
 
-            <input type="checkbox" id="Company" name="Company" value="Company">
+            <input type="checkbox" id="Company" name="Type" value="Company">
             <label for="Company"> Companies</label><br>
 
             <button type="submit">Search</button>
@@ -42,6 +42,8 @@
             String company = request.getParameter("Company");
         %>
 
+        <br>
+        <h2>Customers</h2>
         <table>
             <tr>
                 <th>User ID</th>
@@ -53,15 +55,29 @@
                 <th>Account Active</th>
             </tr>
             <% for (Customer customer : customers) { %>
-                <tr>
-                    <td><%=customer.getUserID()%></td>
-                    <td><%=customer.getUserName()%></td>
-                    <td><%=customer.getUserEmail()%></td>
-                    <td><%=customer.getPassword()%></td>
-                    <td><%=customer.getCustomerType()%></td>
-                    <td><%=customer.getShippingAddress()%></td>
-                    <td><%=customer.activeString()%></td>
-                </tr>
+                <% if (searchName != null) {
+                    if (customer.getUserName().startsWith(searchName)) { %>
+                        <tr>
+                            <td><%=customer.getUserID()%></td>
+                            <td><%=customer.getUserName()%></td>
+                            <td><%=customer.getUserEmail()%></td>
+                            <td><%=customer.getPassword()%></td>
+                            <td><%=customer.getCustomerType()%></td>
+                            <td><%=customer.getShippingAddress()%></td>
+                            <td><%=customer.activeString()%></td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td><%=customer.getUserID()%></td>
+                        <td><%=customer.getUserName()%></td>
+                        <td><%=customer.getUserEmail()%></td>
+                        <td><%=customer.getPassword()%></td>
+                        <td><%=customer.getCustomerType()%></td>
+                        <td><%=customer.getShippingAddress()%></td>
+                        <td><%=customer.activeString()%></td>
+                    </tr>
+                <% } %>
             <% } %>
         </table>
     </body>

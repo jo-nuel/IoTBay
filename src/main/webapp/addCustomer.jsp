@@ -14,34 +14,37 @@
 </head>
 <body class="loginbody">
 
-    <h1 style="color: white;">Add A New Customer</h1>
-    <form class="login-form">
+    <h1>Add A New Customer</h1>
+    <form class="login-form" method="POST" action="/AddCustomerServlet">
         <label for="customerName">Name:</label>
-        <input type="text" name="customerName" id="customerName">
+        <input type="text" name="customerName" id="customerName" required>
 
         <label for="customerEmail">Email:</label>
-        <input type="text" name="customerEmail" id="customerEmail">
+        <input type="text" name="customerEmail" id="customerEmail" required>
 
         <label for="customerPassword">Password:</label>
-        <input type="password" name="customerPassword" id="customerPassword">
+        <input type="password" name="customerPassword" id="customerPassword" required>
 
         <label for="customerUserType">User Type:</label>
         <input type="text" name="customerUserType" id="customerUserType" readonly value="Customer">
 
-        <input type="radio" id="Individual" name="customerType" value="Individual">
-        <label for="Individual">Individual</label><br>
+        <br>
 
-        <input type="radio" id="Company" name="customerType" value="Company">
+        <input type="radio" id="Individual" name="customerType" value="Individual" required>
+        <label for="Individual">Individual</label>
+
+        <br>
+
+        <input type="radio" id="Company" name="customerType" value="Company" required>
         <label for="Company">Company</label><br>
 
         <label for="customerAddress">Shipping Address:</label>
-        <input type="text" name="customerAddress" id="customerAddress">
+        <input type="text" name="customerAddress" id="customerAddress" required>
 
         <button type="submit">Add Customer</button>
-
-        <form method="POST" action="/CustomerManagementServlet">
-            <button type="submit">Cancel</button>
-        </form>
+    </form>
+    <form method="GET" action="/CustomerManagementServlet">
+        <button type="submit">Cancel</button>
     </form>
 </body>
 </html>

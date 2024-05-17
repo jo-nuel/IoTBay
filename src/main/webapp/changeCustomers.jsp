@@ -31,8 +31,10 @@
     %>
 
     <h1 style="color: white;">Changing Customer List</h1>
-    <form class="login-form">
-        <% if (selectedCustomer != null) { %>
+
+    <% if (selectedCustomer != null) { %>
+
+        <form class="login-form"></form>
             <label for="customerID">Customer ID:</label>
             <input type="number" name="customerID" id="customerID" readonly value="<%=Integer.valueOf(selectedCustomer.getUserID())%>">
 
@@ -60,16 +62,18 @@
             <p>What would you like to do with this customer?</p>
 
             <button type="button" onclick="location.href='updateCustomer.jsp';">Update Customer</button>
+        </form>
 
-            <form method="POST" action="/DeleteCustomerServlet">
-                <button type="submit">Delete Customer</button>
-            </form>
+        <form method="POST" action="/DeleteCustomerServlet">
+            <button type="submit">Delete Customer</button>
+        </form>
 
-        <% } else { %>
+    <% } else { %>
+        <form>
             <p>Enter the ID of the customer you want to change.</p>
 
             <% if (submitted != null) { %>
-                <p style="color: red;">Please enter a valid user ID.</p>
+            <p style="color: red;">Please enter a valid user ID.</p>
             <% } %>
 
             <label for="customerID">Customer ID:</label>
@@ -78,8 +82,9 @@
             <input type="hidden" name="submitted" id="submitted" value="true"/>
 
             <button type="submit">Confirm</button>
-        <% } %>
-    </form>
+        </form>
+    <% } %>
+
     <button type="button" onclick="location.href='customerManagement.jsp';">Cancel</button>
 </body>
 </html>

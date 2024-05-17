@@ -18,7 +18,7 @@
     %>
 
     <h1 style="color: white;">Updating Customer</h1>
-    <form class="login-form">
+    <form class="login-form" method="POST" action="/UpdateCustomerServlet">
 
         <label for="customerID">Customer ID:</label>
         <input type="number" name="customerID" id="customerID" readonly value="<%=Integer.valueOf(selectedCustomer.getUserID())%>">
@@ -34,6 +34,8 @@
 
         <label for="customerUserType">User Type:</label>
         <input type="text" name="customerUserType" id="customerUserType" readonly value="<%=selectedCustomer.getUserType()%>">
+
+        <br>
 
         <% if (selectedCustomer.getCustomerType().equals("Individual")) { %>
 
@@ -56,13 +58,15 @@
         <label for="customerAddress">Shipping Address:</label>
         <input type="text" name="customerAddress" id="customerAddress" value="<%=selectedCustomer.getShippingAddress()%>">
 
-        <% if (selectedCustomer.accountString().equals("True")) { %>
+        <br>
+            
+        <% if (selectedCustomer.activeString().equals("True")) { %>
 
             <input type="radio" id="Active" name="accountActive" value="Active" checked>
-            <label for="Active">Individual</label><br>
+            <label for="Active">Active</label><br>
 
             <input type="radio" id="Inactive" name="accountActive" value="Inactive">
-            <label for="Inactive">Company</label><br>
+            <label for="Inactive">Inactive</label><br>
 
         <% } else { %>
 
@@ -74,13 +78,10 @@
 
         <% } %>
 
-        <form method="POST" action="/UpdateCustomerServlet">
             <button type="submit">Save Changes</button>
-        </form>
-
-        <form method="POST" action="/CustomerManagementServlet">
-            <button type="submit">Cancel</button>
-        </form>
+    </form>
+    <form method="GET" action="/CustomerManagementServlet">
+        <button type="submit">Cancel</button>
     </form>
 </body>
 </html>

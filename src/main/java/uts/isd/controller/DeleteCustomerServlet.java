@@ -22,13 +22,17 @@ public class DeleteCustomerServlet extends HttpServlet{
         Customer selectedCustomer = (Customer) session.getAttribute("selectedCustomer"); // Get ID to be deleted
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
 
+        System.out.println("check");
+
         try {
             customerDAO.deleteCustomer(selectedCustomer.getUserID());
             session.setAttribute("customers", customerDAO.getAllCustomers()); //Refresh customer list
 
-            response.sendRedirect("customermanagement.jsp"); // Refresh management page
+            response.sendRedirect("customerManagement.jsp"); // Refresh management page
         } catch (SQLException e) {
             e.printStackTrace(); // Handle database errors
         }
+
+        response.sendRedirect("customerManagement.jsp");
     }
 }
