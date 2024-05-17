@@ -55,12 +55,5 @@ public class UpdateDeviceServlet extends HttpServlet {
             session.setAttribute("error", "Database error: Unable to update device.");
             response.sendRedirect("editDevice.jsp?id=" + deviceId);
         }
-
-        /*
-         * } else {
-         * session.setAttribute("error", "Unauthorized access.");
-         * response.sendRedirect("login.jsp");
-         * }
-         */
     }
 }
