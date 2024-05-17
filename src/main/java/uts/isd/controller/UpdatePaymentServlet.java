@@ -66,7 +66,7 @@ public class UpdatePaymentServlet extends HttpServlet {
  
                     session.setAttribute("paymentIDToUpdate", paymentIDUpdate);
 
-                    response.sendRedirect("updatePaymentForm.jsp?paymentID=" + paymentIDUpdate);
+                    response.sendRedirect("updatePaymentF.jsp?paymentID=" + paymentIDUpdate);
 
                 } else if ("setDefault".equals(action)) {
 

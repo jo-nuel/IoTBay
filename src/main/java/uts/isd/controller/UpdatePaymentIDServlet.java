@@ -90,7 +90,7 @@ public class UpdatePaymentIDServlet extends HttpServlet {
         
             if (!errors.isEmpty()) {
                 request.setAttribute("errors", errors);
-                request.getRequestDispatcher("updatePaymentForm.jsp").forward(request, response);
+                request.getRequestDispatcher("updatePaymentF.jsp").forward(request, response);
                 return;
             }
 
@@ -99,7 +99,7 @@ public class UpdatePaymentIDServlet extends HttpServlet {
                 paymentDAO.updatePayment(paymentID, paymentType, cardNumber);
     
                 List<Payment> paymentTypep = paymentDAO.findPaymentU(user.getUserID());
-                request.setAttribute("paymentMethods", paymentTypep);
+                request.setAttribute("paymentType", paymentTypep);
     
                 request.getRequestDispatcher("paymentDetails?action=success").forward(request, response);
                 

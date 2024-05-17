@@ -6,5 +6,6 @@
 		"lib\\junit-4.13.2.jar"
 	],
 	"cmake.configureOnOpen": false,
-	"java.configuration.updateBuildConfiguration": "automatic"
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"liveServer.settings.port": 5501
 }

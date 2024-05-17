@@ -15,14 +15,25 @@ import uts.isd.model.Payment;
 
 public class PaymentDAO {
 
-    private Statement st;
-    private Connection conn;
+    // private Statement st;
+    // private Connection conn;
 
-    public PaymentDAO() throws ClassNotFoundException, SQLException {
-        DBConnector dbConnector = new DBConnector();
-        conn = dbConnector.openConnection();
+    // public PaymentDAO(Connection conn) throws SQLException {
+    //     this.conn = conn;
+    //     DBConnector dbConnector = new DBConnector();
+    //     conn = dbConnector.openConnection();
+    //     conn.setAutoCommit(true);
+    //     st = conn.createStatement();
+    // }
+
+    private Connection conn;
+    private PreparedStatement readSt;
+    private String readQuery = "SELECT * FROM Payment";
+
+    public PaymentDAO(Connection conn) throws SQLException {
+        this.conn = conn;
         conn.setAutoCommit(true);
-        st = conn.createStatement();
+        readSt = conn.prepareStatement(readQuery);
     }
 
 
@@ -52,18 +63,31 @@ public class PaymentDAO {
     }
 
 
-    public void addPayment(String paymentType,String cardName, String cardNumber, String cardExpiryDate,String cardCvv, String userID) throws SQLException {
 
-        String cardNumberTrimmed = cardNumber.substring(cardNumber.length() - 4);
-
-        st.executeUpdate("INSERT INTO iotbay.Payment (paymentType,cardName, cardNumber, cardExpiryDate, cardCvv, userID,savedPaymentDetails) VALUES ('" +  paymentType + "', '" + cardName + "', " + cardNumberTrimmed + "', '" +cardExpiryDate + "', '" +cardCvv + "', '"  +userID + ", 1)");
+    public void addPayment(String paymentType,String cardName, String cardNumber, String cardExpiryDate,String cardCvv, String userID ) throws SQLException {
+        String sql = "INSERT INTO Payment (paymentType,cardName, cardNumber, cardExpiryDate, cardCvv, userID) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement st = conn.prepareStatement(sql);
+        st.setString(1, paymentType);
+        st.setString(2, cardName);
+        st.setString(3, cardNumber);
+        st.setString(4, cardExpiryDate);
+        st.setString(5, cardCvv);
+        st.setString(6, userID);
+        st.executeUpdate();
     }
+
+    // public void addPayment(String paymentType,String cardName, String cardNumber, String cardExpiryDate,String cardCvv, String userID) throws SQLException {
+
+    //     String cardNumberTrimmed = cardNumber.substring(cardNumber.length() - 4);
+
+    //     st.executeUpdate("INSERT INTO iotbay.Payment (paymentType,cardName, cardNumber, cardExpiryDate, cardCvv, userID,savedPaymentDetails) VALUES ('" +  paymentType + "', '" + cardName + "', " + cardNumberTrimmed + "', '" +cardExpiryDate + "', '" +cardCvv + "', '"  +userID + ", 1)");
+    // }
     
 
     public void deletePayment(int paymentID) throws SQLException {
 
-        st.executeUpdate("UPDATE iotbay.User SET paymentID = NULL WHERE paymentID = " + paymentID);
-        st.executeUpdate("DELETE FROM iotbay.Payment WHERE paymentID = " + paymentID);
+        readSt.executeUpdate("UPDATE iotbay.User SET paymentID = NULL WHERE paymentID = " + paymentID);
+        readSt.executeUpdate("DELETE FROM iotbay.Payment WHERE paymentID = " + paymentID);
     }
 
     
@@ -156,6 +180,27 @@ public class PaymentDAO {
         } finally {}
     }
       
+    public ArrayList<Payment> getAllPayments() throws SQLException {
+        ArrayList<Payment> payments = new ArrayList<>();
+        String query = "SELECT * FROM Payment";
+        PreparedStatement statement = conn.prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            // Retrieve payment details from result set and create Payment objects
+            int paymentID = rs.getInt("paymentID");
+            String paymentType = rs.getString("paymentType");
+            String cardName = rs.getString("cardName");
+            String cardNumber = rs.getString("cardNumber");
+            String cardExpiryDate = rs.getString("cardExpiryDate");
+            String cardCvv = rs.getString("cardCvv");
+            String userID = rs.getString("UserID");
+            boolean savedPayment = rs.getBoolean("savedPayment");
+
+            Payment payment = new Payment(paymentID, paymentType, cardName, cardNumber, cardExpiryDate, cardCvv,userID,savedPayment);
+            payments.add(payment);
+        }
+        return payments;
+    }
 
     public void closeConnection() throws SQLException {
         conn.close();

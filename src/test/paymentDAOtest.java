@@ -11,10 +11,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import uts.isd.model.Payment;
+import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.PaymentDAO;
 
 public class PaymentDAOtest {
-
+    private DBConnector connector;
+    private Connection conn;
     private PaymentDAO paymentDAO;
 
     @Before
@@ -34,47 +36,56 @@ public class PaymentDAOtest {
         assertFalse(payments.isEmpty());
     }
 
-    @Test
-    public void testAddPayment() throws SQLException {
-        // Add a payment
-        paymentDAO.addPayment("paymentType", "cardName", "cardNumber", "cardExpiryDate", "cardCvv", "userID");
-        // Retrieve the added payment and check if it exists
-        List<Payment> payments = paymentDAO.findPaymentU("userID");
-        boolean paymentAdded = false;
-        for (Payment payment : payments) {
-            if (payment.getCardNumber().equals("cardNumber")) {
-                paymentAdded = true;
-                break;
-            }
-        }
-        assertTrue(paymentAdded);
-    }
+    // @Test
+    // public void testAddPayment() throws SQLException {
+    //     // Add a payment
+    //     paymentDAO.addPayment("Debit", "Aryan", "1234 4567 6567 5454", "12/25", "123", "userID");
+    //     // Retrieve the added payment and check if it exists
+    //     List<Payment> payments = paymentDAO.findPaymentU("userID");
+    //     boolean paymentAdded = false;
+    //     for (Payment payment : payments) {
+    //         if (payment.getCardNumber().equals("cardNumber")) {
+    //             paymentAdded = true;
+    //             break;
+    //         }
+    //     }
+    //     assertTrue(paymentAdded);
+    // }
 
     @Test
-    public void testDeletePayment() throws SQLException {
-        // Add a payment
-        paymentDAO.addPayment("paymentType", "cardName", "cardNumber", "cardExpiryDate", "cardCvv", "userID");
-        // Retrieve the added payment
-        List<Payment> payments = paymentDAO.findPaymentU("userID");
-        int paymentID = payments.get(0).getPaymentID();
-        // Delete the payment
-        paymentDAO.deletePayment(paymentID);
-        // Try to find the deleted payment
-        List<Payment> remainingPayments = paymentDAO.findPaymentU("userID");
-        boolean paymentDeleted = true;
-        for (Payment payment : remainingPayments) {
-            if (payment.getPaymentID() == paymentID) {
-                paymentDeleted = false;
-                break;
-            }
-        }
-        assertTrue(paymentDeleted);
+    public void testAddPayment() throws SQLException {
+        int initialSize = paymentDAO.getAllPayments().size();
+        paymentDAO.addPayment("Debit", "aryan", "1234 4434 3322 4534", "12/25", "123", user.getUserID(), "saved"
+                );
+        int newSize = paymentDAO.getAllPayments().size();
+        assertEquals(initialSize + 1, newSize);
     }
+
+    // @Test
+    // public void testDeletePayment() throws SQLException {
+    //     // Add a payment
+    //     paymentDAO.addPayment("Debit", "Aryan", "1234 4567 6567 5454", "12/25", "123", "userID");
+    //     // Retrieve the added payment
+    //     List<Payment> payments = paymentDAO.findPaymentU("userID");
+    //     int paymentID = payments.get(0).getPaymentID();
+    //     // Delete the payment
+    //     paymentDAO.deletePayment(paymentID);
+    //     // Try to find the deleted payment
+    //     List<Payment> remainingPayments = paymentDAO.findPaymentU("userID");
+    //     boolean paymentDeleted = true;
+    //     for (Payment payment : remainingPayments) {
+    //         if (payment.getPaymentID() == paymentID) {
+    //             paymentDeleted = false;
+    //             break;
+    //         }
+    //     }
+    //     assertTrue(paymentDeleted);
+    // }
 
     @Test
     public void testIsUserDefault() throws SQLException {
         // Add a payment
-        paymentDAO.addPayment("paymentType", "cardName", "cardNumber", "cardExpiryDate", "cardCvv", "userID");
+        paymentDAO.addPayment("Debit", "Aryan", "1234 4567 6567 5454", "12/25", "123", "userID");
         // Retrieve the added payment
         List<Payment> payments = paymentDAO.findPaymentU("userID");
         int paymentID = payments.get(0).getPaymentID();

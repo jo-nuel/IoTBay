@@ -48,7 +48,7 @@ public class ConnServlet extends HttpServlet {
             customerDAO = new CustomerDAO(conn);
             userDAO = new UserDao(conn);
             deviceDAO = new DeviceDAO(conn);
-            paymentDAO = new PaymentDAO();
+            paymentDAO = new PaymentDAO(conn);
             ArrayList<String> categories = deviceDAO.getCategories();
             session.setAttribute("categories", categories);
         } catch (SQLException | ClassNotFoundException e) {

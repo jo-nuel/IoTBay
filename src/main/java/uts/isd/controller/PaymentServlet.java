@@ -53,7 +53,7 @@ public class PaymentServlet extends HttpServlet {
 
 
             request.setAttribute("paymentType", paymentType);
-            request.getRequestDispatcher("paymentDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("payment.jsp").forward(request, response);
     
         } catch (SQLException ex) {
             Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
