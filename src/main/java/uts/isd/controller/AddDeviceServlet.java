@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,7 @@ public class AddDeviceServlet extends HttpServlet {
 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String filePath = getServletContext().getRealPath("/images/") + File.separator + fileName;
+
         filePart.write(filePath);
         String deviceImageURL = "/images/" + fileName;
 

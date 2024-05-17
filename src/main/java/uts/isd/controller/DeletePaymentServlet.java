@@ -7,35 +7,36 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import uts.isd.model.User;
 import uts.isd.model.dao.PaymentDAO;
 
 public class DeletePaymentServlet extends HttpServlet {
-    private PaymentDAO paymentDAO;
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Handle the GET request to show the confirmation page
+        request.getRequestDispatcher("deletePayment.jsp").forward(request, response);
+    }
 
     @Override
-    public void init() throws ServletException {
-        try {
-            paymentDAO = new PaymentDAO(); // Initialize DAO
-        } catch (SQLException | ClassNotFoundException ex) {
-            // Handle the exception appropriately
-            System.out.println(ex);
-            // Optionally re-throw the exception
-            throw new ServletException("Failed to initialize PaymentDAO", ex);
-        }
-    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String cardNumber = request.getParameter("cardNumber"); // Assuming card number is used as identifier
+        // if (user instanceof Staff) { // Check if the user is a staff member
+        PaymentDAO paymentDAO = (PaymentDAO) session.getAttribute("paymentDAO");
+
+        int paymentID = Integer.parseInt(request.getParameter("paymentID"));
 
         try {
-            paymentDAO.deletePaymentDetails(cardNumber);
-            response.sendRedirect("paymentConfirmation.jsp"); // Redirect to confirmation page
+            paymentDAO.deletePayment(paymentID);
+            response.sendRedirect("viewPayment.jsp");
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle database errors
-            // You can redirect to an error page here if needed
+            System.out.println("SQL Error: " + e.getMessage());
+            session.setAttribute("error", "Database error: Unable to delete device.");
+            response.sendRedirect("deletePayment.jsp");
         }
+
     }
 }
-

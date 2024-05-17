@@ -17,7 +17,7 @@
         Customer selectedCustomer = (Customer) session.getAttribute("selectedCustomer");
     %>
 
-    <h1>Updating Customer</h1>
+    <h1 style="color: white;">Updating Customer</h1>
     <form class="login-form" method="POST" action="/UpdateCustomerServlet">
 
         <label for="customerID">Customer ID:</label>

@@ -5,118 +5,103 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import uts.isd.model.Payment;
 
 public class PaymentDAO {
+
     private Connection conn;
-    private PreparedStatement addPaymentDetailsSt;
+    private PreparedStatement readSt;
+    private String readQuery = "SELECT * FROM Payment";
 
-    public PaymentDAO() throws SQLException, ClassNotFoundException {
-        try {
-            // Initialize database connection and prepared statements
-            DBConnector db = new DBConnector(); // Create an instance of DBConnector
-            conn = db.openConnection(); // Call openConnection() on the instance of DBConnector
-            // Prepare the statement for adding payment details
-            addPaymentDetailsSt = conn.prepareStatement("INSERT INTO payment_details (card_name, card_number, expiry_date, cvv) VALUES (?, ?, ?, ?)");
-        } catch (ClassNotFoundException | SQLException ex) {
-            // Handle the exception appropriately
-            System.out.println(ex);
-            // Optionally re-throw the exception
-            throw ex;
-        }
-    }
-  
-    public void addPaymentDetails(String cardName, String cardNumber, String expiryDate, String cvv) throws SQLException {
-        // Set parameters for the prepared statement
-        addPaymentDetailsSt.setString(1, cardName);
-        addPaymentDetailsSt.setString(2, cardNumber);
-        addPaymentDetailsSt.setString(3, expiryDate);
-        addPaymentDetailsSt.setString(4, cvv);
-        // Execute the statement to add payment details to the database
-        addPaymentDetailsSt.executeUpdate();
+    public PaymentDAO(Connection conn) throws SQLException {
+        this.conn = conn;
+        conn.setAutoCommit(true);
+        readSt = conn.prepareStatement(readQuery);
     }
 
+    public void addPayment(String paymentType, String cardName, String cardNumber, String cardExpiryDate,
+            String cardCvv) throws SQLException {
+        String sql = "INSERT INTO Payment (paymentType,cardName, cardNumber, cardExpiryDate, cardCvv) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement st = conn.prepareStatement(sql);
+        st.setString(1, paymentType);
+        st.setString(2, cardName);
+        st.setString(3, cardNumber);
+        st.setString(4, cardExpiryDate);
+        st.setString(5, cardCvv);
+        st.executeUpdate();
+    }
 
-    public void updatePaymentDetails(String cardName, String cardNumber, String expiryDate, String cvv) throws SQLException {
-        String query = "UPDATE payment_details SET card_name=?, card_number=?, expiry_date=?, cvv=?";
-        try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, cardName);
-            ps.setString(2, cardNumber);
-            ps.setString(3, expiryDate);
-            ps.setString(4, cvv);
-            ps.executeUpdate();
+    // Update an existing device
+    public void updatePayment(int paymentID, String paymentType, String cardName, String cardNumber,
+            String cardExpiryDate, String cardCvv) throws SQLException {
+        String sql = "UPDATE Payment SET paymentType = ?, cardName = ?, cardNumber = ?, cardExpiryDate = ?, cardCvv = ? WHERE paymentID = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, paymentID);
+            statement.setString(2, paymentType);
+            statement.setString(3, cardName);
+            statement.setString(4, cardNumber);
+            statement.setString(5, cardExpiryDate);
+            statement.setString(6, cardCvv);
+            statement.executeUpdate();
         }
     }
 
-    public void deletePaymentDetails(String cardNumber) throws SQLException {
-        String query = "DELETE FROM payment_details WHERE card_number=?";
-        try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, cardNumber);
-            ps.executeUpdate();
+    // Delete a device
+    public void deletePayment(int paymentID) throws SQLException {
+        String sql = "DELETE FROM Payment WHERE paymentID = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, paymentID);
+            statement.executeUpdate();
         }
     }
 
-    public ArrayList<Payment> getAllPayments() throws SQLException {
-        ArrayList<Payment> payments = new ArrayList<>();
-        String query = "SELECT * FROM payments";
-        PreparedStatement statement = conn.prepareStatement(query);
-        ResultSet rs = statement.executeQuery();
+    // Retrieve a single device by ID
+    public Payment getPayment(int paymentID) throws SQLException {
+        String sql = "SELECT * FROM Payment WHERE paymentID = " + paymentID;
+        PreparedStatement st = conn.prepareStatement(sql);
+        ResultSet rs = st.executeQuery(sql);
+
         while (rs.next()) {
-            // Retrieve payment details from result set and create Payment objects
-            int paymentID = rs.getInt("paymentID");
-            String paymentType = rs.getString("paymentType");
-            String cardName = rs.getString("cardName");
-            String cardNumber = rs.getString("cardNumber");
-            String cardExpiryDate = rs.getString("cardExpiryDate");
-            String cardCvv = rs.getString("cardCvv");
+            int paymentIDD = rs.getInt(1);
+            String paymentType = rs.getString(2);
+            String cardName = rs.getString(3);
+            String cardNumber = rs.getString(4);
+            String cardExpiryDate = rs.getString(5);
+            String cardCvv = rs.getString(6);
 
-            Payment payment = new Payment(paymentID, paymentType, cardName, cardNumber, cardExpiryDate, cardCvv);
-            payments.add(payment);
+            Payment payment = new Payment(paymentIDD, paymentType, cardName, cardNumber, cardExpiryDate, cardCvv);
+            return payment;
         }
+        return null;
+    }
+
+    public List<Payment> getAllPayments() throws SQLException {
+        List<Payment> payments = new ArrayList<Payment>();
+        ResultSet rs = readSt.executeQuery();
+
+        while (rs.next()) {
+            int paymentIDD = rs.getInt(1);
+            String paymentType = rs.getString(2);
+            String cardName = rs.getString(3);
+            String cardNumber = rs.getString(4);
+            String cardExpiryDate = rs.getString(5);
+            String cardCvv = rs.getString(6);
+            Payment p = new Payment();
+            p.setpaymentID(paymentIDD);
+            p.setpaymentType(paymentType);
+            p.setcardName(cardName);
+            p.setcardNumber(cardNumber);
+            p.setcardExpiryDate(cardExpiryDate);
+            p.setcardCvv(cardCvv);
+
+            System.out.println(p.getcardName());
+
+            payments.add(p);
+        }
+
         return payments;
     }
 
-
-    public void makePayment(String cardNumber, String expiryDate, String cvv, double amount) throws SQLException {
-        String query = "INSERT INTO payment_details (card_number, expiry_date, cvv, amount) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, cardNumber);
-            ps.setString(2, expiryDate);
-            ps.setString(3, cvv);
-            ps.setDouble(4, amount);
-            ps.executeUpdate();
-        }
-    }
-
-    public ArrayList<Payment> getPayments(String userID) throws SQLException {
-        ArrayList<Payment> payments = new ArrayList<>();
-        String sql = "SELECT * FROM payments WHERE userID = ?";
-        
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.valueOf(userID));
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    int paymentID = rs.getInt("paymentID");
-                    String paymentType = rs.getString("paymentType");
-                    String cardName = rs.getString("cardName");
-                    String cardNumber = rs.getString("cardNumber");
-                    String cardExpiryDate = rs.getString("cardExpiryDate");
-                    String cardCvv = rs.getString("cardCvv");
-                    Payment payment = new Payment(paymentID, paymentType, cardName, cardNumber, cardExpiryDate, cardCvv);
-                    payments.add(payment);
-                }
-            }
-        }
-        return payments;
-    }
-
-    public void close() throws SQLException {
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-
-    }
-
+}

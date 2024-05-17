@@ -16,10 +16,14 @@
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String address = request.getParameter("address");
+            String customerType = request.getParameter("customerType");
+            boolean accountActive = Boolean.parseBoolean(request.getParameter("accountActive"));
             String submitted = request.getParameter("submitted");
 
             if (submitted != null){
-                Customer customer = new Customer(email, username, password, address);
+                String userID = java.util.UUID.randomUUID().toString();
+                String userType = "Customer";
+                Customer customer = new Customer(userID, username, email, password, userType, customerType, address, accountActive);
                 session.setAttribute("customer", customer);
             }
         %>

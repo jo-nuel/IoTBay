@@ -11,7 +11,6 @@ import java.sql.SQLException;
 public class DeleteDeviceServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Handle the GET request to show the confirmation page
         request.getRequestDispatcher("deleteDevice.jsp").forward(request, response);
     }
 

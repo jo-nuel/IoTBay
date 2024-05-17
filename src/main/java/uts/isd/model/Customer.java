@@ -5,7 +5,8 @@ public class Customer extends User {
     private String shippingAddress;
     private boolean accountActive;
 
-    public Customer(String _userID, String _userName, String _userEmail, String _password, String _userType, String _customerType, String _shippingAddress, boolean _accountActive) {
+    public Customer(String _userID, String _userName, String _userEmail, String _password, String _userType,
+            String _customerType, String _shippingAddress, boolean _accountActive) {
         super(_userID, _userName, _userEmail, _password, _userType);
         this.customerType = _customerType;
         this.shippingAddress = _shippingAddress;
@@ -35,8 +36,7 @@ public class Customer extends User {
     public String activeString() {
         if (this.accountActive) {
             return "True";
-        }
-        else {
+        } else {
             return "False";
         }
     }

@@ -50,7 +50,7 @@
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                     <div>
-                        <h1><%=customer.getUsername()%></h1>
+                        <h1><%=customer.getUserName()%></h1>
                     </div>
                     <div>
                         <button><a href="logout.jsp">Logout</a></button>
@@ -65,6 +65,7 @@
             </main>
             <footer>
                 <button type="button" onclick="location.href='deviceCatalogue.jsp';">Go to catalogue</button>
+                <button type="button" onclick="location.href='viewPayment.jsp';">Go to payment</button>
             </footer>
         <% } %>
     </body>

@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.DeviceDAO;
 import uts.isd.model.dao.UserDao;
-import uts.isd.model.dao.CustomerDAO;;
+import uts.isd.model.dao.CustomerDAO;
+import uts.isd.model.dao.PaymentDAO;
 
 public class ConnServlet extends HttpServlet {
 
@@ -22,6 +23,7 @@ public class ConnServlet extends HttpServlet {
     private UserDao userDAO;
     private CustomerDAO customerDAO;
     private DeviceDAO deviceDAO;
+    private PaymentDAO paymentDAO;
     private Connection conn;
 
     @Override
@@ -40,11 +42,12 @@ public class ConnServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            db = new DBConnector(); // Create an instance of DBConnector
-            conn = db.openConnection(); // Call openConnection() on the instance of DBConnector
+            db = new DBConnector();
+            conn = db.openConnection();
             customerDAO = new CustomerDAO(conn);
             userDAO = new UserDao(conn);
             deviceDAO = new DeviceDAO(conn);
+            paymentDAO = new PaymentDAO(conn);
             ArrayList<String> categories = deviceDAO.getCategories();
             session.setAttribute("categories", categories);
         } catch (SQLException | ClassNotFoundException e) {
@@ -54,6 +57,7 @@ public class ConnServlet extends HttpServlet {
         session.setAttribute("userDAO", userDAO);
         session.setAttribute("customerDAO", customerDAO);
         session.setAttribute("deviceDAO", deviceDAO);
+        session.setAttribute("paymentDAO", paymentDAO);
         request.getRequestDispatcher("login.jsp").include(request, response);
     }
 

@@ -9,19 +9,24 @@ public class Payment implements Serializable {
     private String cardNumber;
     private String cardExpiryDate;
     private String cardCvv;
-    
-    
-//payment date , cardname , cardnumber , card expiry date , card cvv , saved card name , saved card number , saved expiry date , saved cvv
+    private String userID;
+    // private boolean savedPayment;
+
+    // payment date , cardname , cardnumber , card expiry date , card cvv , saved
+    // card name , saved card number , saved expiry date , saved cvv
     public Payment(int paymentID, String paymentType, String cardName,
-    String cardNumber, String cardExpiryDate, String cardCvv) {
+            String cardNumber, String cardExpiryDate, String cardCvv) {
 
         this.paymentID = paymentID;
         this.paymentType = paymentType;
         this.cardName = cardName;
-        this.cardNumber= cardNumber;
+        this.cardNumber = cardNumber;
         this.cardExpiryDate = cardExpiryDate;
         this.cardCvv = cardCvv;
-        
+    }
+
+    public Payment() {
+
     }
 
     public int getpaymentID() {
@@ -31,7 +36,6 @@ public class Payment implements Serializable {
     public void setpaymentID(int paymentID) {
         this.paymentID = paymentID;
     }
-
 
     public String getpaymentType() {
         return paymentType;
@@ -49,7 +53,6 @@ public class Payment implements Serializable {
         this.cardName = cardName;
     }
 
-
     public String getcardNumber() {
         return cardNumber;
     }
@@ -58,14 +61,13 @@ public class Payment implements Serializable {
         this.cardNumber = cardNumber;
     }
 
-     public String getcardExpiryDate() {
+    public String getcardExpiryDate() {
         return cardExpiryDate;
     }
 
     public void setcardExpiryDate(String cardExpiryDate) {
         this.cardExpiryDate = cardExpiryDate;
     }
-
 
     public String getcardCvv() {
         return cardCvv;
@@ -75,5 +77,16 @@ public class Payment implements Serializable {
         this.cardCvv = cardCvv;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    // public void setSavedPayment(boolean savedPayment) {
+    // this.savedPayment = savedPayment;
+    // }
 
 }

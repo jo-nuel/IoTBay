@@ -1,93 +1,67 @@
+
 package uts.unit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-
 import uts.isd.model.Payment;
+import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.PaymentDAO;
 
-public class paymentdaotest {
+public class PaymentDAOTest {
+    private DBConnector connector;
+    private Connection conn;
     private PaymentDAO paymentDAO;
 
-    @BeforeEach
-    public void setUp() throws SQLException, ClassNotFoundException {
-        paymentDAO = new PaymentDAO();
-    }
-
-    @AfterEach
-    public void tearDown() throws SQLException {
-        paymentDAO.close();
+    public PaymentDAOTest() throws ClassNotFoundException, SQLException {
+        connector = new DBConnector();
+        conn = connector.openConnection();
+        paymentDAO = new PaymentDAO(conn);
     }
 
     @Test
-    public void testAddPaymentDetails() throws SQLException {
-        // Add test payment details
-        paymentDAO.addPaymentDetails("TestCard", "1234567890123456", "12/25", "123");
-        // Retrieve payment details from the database
-        ArrayList<Payment> payments = paymentDAO.getAllPayments();
-        // Check if payment details are added successfully
-        assertNotNull(payments);
-        assertEquals(1, payments.size());
-        // Verify the added payment details
-        Payment payment = payments.get(0);
-        assertEquals("TestCard", payment.getcardName());
-        assertEquals("1234567890123456", payment.getcardNumber());
-        assertEquals("12/25", payment.getcardExpiryDate());
-        assertEquals("123", payment.getcardCvv());
+    public void testConnection() throws SQLException {
+        assertNotNull(conn);
     }
 
     @Test
-    public void testDeletePaymentDetails() throws SQLException {
-        // Add test payment details
-        paymentDAO.addPaymentDetails("TestCard", "1234567890123456", "12/25", "123");
-        // Retrieve payment details from the database
-        ArrayList<Payment> paymentsBeforeDeletion = paymentDAO.getAllPayments();
-        // Delete the added payment details
-        paymentDAO.deletePaymentDetails("1234567890123456");
-        // Retrieve payment details after deletion
-        ArrayList<Payment> paymentsAfterDeletion = paymentDAO.getAllPayments();
-        // Check if payment details are deleted successfully
-        assertNotNull(paymentsBeforeDeletion);
-        assertNotNull(paymentsAfterDeletion);
-        assertEquals(1, paymentsBeforeDeletion.size());
-        assertEquals(0, paymentsAfterDeletion.size());
+    public void testAddPayment() throws SQLException {
+        int initialSize = paymentDAO.getAllPayments().size();
+        paymentDAO.addPayment("Test", "aryan", "1223 4455 5443 5566", "12/26", "123");
+        int newSize = paymentDAO.getAllPayments().size();
+        assertEquals(initialSize + 1, newSize);
     }
 
     @Test
-    public void testUpdatePaymentDetails() throws SQLException {
-        // Add test payment details
-        paymentDAO.addPaymentDetails("TestCard", "1234567890123456", "12/25", "123");
-        // Retrieve payment details from the database
-        ArrayList<Payment> paymentsBeforeUpdate = paymentDAO.getAllPayments();
-        // Update the added payment details
-        paymentDAO.updatePaymentDetails("UpdatedCard", "1111222233334444", "01/30", "999");
-        // Retrieve updated payment details from the database
-        ArrayList<Payment> paymentsAfterUpdate = paymentDAO.getAllPayments();
-        // Check if payment details are updated successfully
-        assertNotNull(paymentsBeforeUpdate);
-        assertNotNull(paymentsAfterUpdate);
-        assertEquals(1, paymentsBeforeUpdate.size());
-        assertEquals(1, paymentsAfterUpdate.size());
-        // Verify the updated payment details
-        Payment payment = paymentsAfterUpdate.get(0);
-        assertEquals("UpdatedCard", payment.getcardName());
-        assertEquals("1111222233334444", payment.getcardNumber());
-        assertEquals("01/30", payment.getcardExpiryDate());
-        assertEquals("999", payment.getcardCvv());
+    public void testGetAllPayments() throws SQLException {
+        List<Payment> payments = paymentDAO.getAllPayments();
+        assertTrue(payments.size() > 0);
     }
 
-    public PaymentDAO getPaymentDAO() {
-        return paymentDAO;
+    @Test
+    public void testUpdatePayment() throws SQLException {
+        paymentDAO.updatePayment(16, "Test 2", "aryan 2", "1223 4455 5443 9999", "12/27", "433");
+        Payment payment = paymentDAO.getPayment(16);
+        assertEquals("Updated Test Payment", payment.getcardName());
     }
 
-    public void setPaymentDAO(PaymentDAO paymentDAO) {
-        this.paymentDAO = paymentDAO;
+    @Test
+    public void testGetPayment() throws SQLException {
+        Payment payment = paymentDAO.getPayment(111);
+        assertNotNull(payment);
+        assertEquals(111, payment.getpaymentID());
     }
+
+    @Test
+    public void testDeletePayment() throws SQLException {
+        int initialSize = paymentDAO.getAllPayments().size();
+        paymentDAO.deletePayment(22);
+        int newSize = paymentDAO.getAllPayments().size();
+        assertEquals(initialSize - 1, newSize);
+    }
+
 }

@@ -43,6 +43,9 @@
         </div>
     </nav>
     
+    <%
+    Device device = (Device) session.getAttribute("device");
+    %>
     <div class="container my-3">
         <h2 class="display-6">Add New Device</h2>
         <form action="/AddDeviceServlet" method="post" class="form-control" enctype="multipart/form-data">
@@ -82,7 +85,6 @@
                 <input type="file" class="form-control" id="deviceImage" name="deviceImage" accept="image/*" required>
             </div>
             <button type="submit" class="btn btn-primary">Add Device</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='deviceCatalogue.jsp';">Cancel</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

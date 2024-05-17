@@ -14,7 +14,7 @@
 </head>
 <body class="loginbody">
 
-    <h1>Add A New Customer</h1>
+    <h1 style="color: white;">Add A New Customer</h1>
     <form class="login-form" method="POST" action="/AddCustomerServlet">
         <label for="customerName">Name:</label>
         <input type="text" name="customerName" id="customerName" required><br>
@@ -28,12 +28,8 @@
         <label for="customerUserType">User Type:</label>
         <input type="text" name="customerUserType" id="customerUserType" readonly value="Customer">
 
-        <br>
-
         <input type="radio" id="Individual" name="customerType" value="Individual" required>
         <label for="Individual">Individual</label>
-
-        <br>
 
         <input type="radio" id="Company" name="customerType" value="Company" required>
         <label for="Company">Company</label><br>

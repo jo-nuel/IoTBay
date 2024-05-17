@@ -30,36 +30,36 @@
         }
     %>
 
-    <h1>Changing Customer List</h1>
+    <h1 style="color: white;">Changing Customer List</h1>
 
     <% if (selectedCustomer != null) { %>
 
         <form class="login-form"></form>
-            <label for="customerID">Customer ID:</label>
+            <label for="customerID" style="color: white;">Customer ID:</label>
             <input type="number" name="customerID" id="customerID" readonly value="<%=Integer.valueOf(selectedCustomer.getUserID())%>">
             <br>
-            <label for="customerName">Name:</label>
+            <label for="customerName" style="color: white;">Name:</label>
             <input type="text" name="customerName" id="customerName" readonly value="<%=selectedCustomer.getUserName()%>">
             <br>
-            <label for="customerEmail">Email:</label>
+            <label for="customerEmail" style="color: white;">Email:</label>
             <input type="text" name="customerEmail" id="customerEmail" readonly value="<%=selectedCustomer.getUserEmail()%>">
             <br>
-            <label for="customerPassword">Password:</label>
+            <label for="customerPassword" style="color: white;">Password:</label>
             <input type="text" name="customerPassword" id="customerPassword" readonly value="<%=selectedCustomer.getPassword()%>">
             <br>
-            <label for="customerUserType">User Type:</label>
+            <label for="customerUserType" style="color: white;">User Type:</label>
             <input type="text" name="customerUserType" id="customerUserType" readonly value="<%=selectedCustomer.getUserType()%>">
             <br>
-            <label for="customerType">Customer Type:</label>
+            <label for="customerType" style="color: white;">Customer Type:</label>
             <input type="text" name="customerType" id="customerType" readonly value="<%=selectedCustomer.getCustomerType()%>">
             <br>
-            <label for="customerAddress">Shipping Address:</label>
+            <label for="customerAddress" style="color: white;">Shipping Address:</label>
             <input type="text" name="customerAddress" id="customerAddress" readonly value="<%=selectedCustomer.getShippingAddress()%>">
             <br>
-            <label for="customerActive">Account Active:</label>
+            <label for="customerActive" style="color: white;">Account Active:</label>
             <input type="text" name="customerActive" id="customerActive" readonly value="<%=selectedCustomer.activeString()%>">
             <br>
-            <p>What would you like to do with this customer?</p>
+            <p style="color: white;">What would you like to do with this customer?</p>
 
             <button type="button" onclick="location.href='updateCustomer.jsp';">Update Customer</button>
         </form>
@@ -70,13 +70,13 @@
 
     <% } else { %>
         <form>
-            <p>Enter the ID of the customer you want to change.</p>
+            <p style="color: white;">Enter the ID of the customer you want to change.</p>
 
             <% if (submitted != null) { %>
             <p style="color: red;">Please enter a valid user ID.</p>
             <% } %>
 
-            <label for="customerID">Customer ID:</label>
+            <label for="customerID" style="color: white;">Customer ID:</label>
             <input type="number" name="customerID" id="customerID" required>
 
             <input type="hidden" name="submitted" id="submitted" value="true"/>

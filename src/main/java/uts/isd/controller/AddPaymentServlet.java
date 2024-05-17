@@ -1,47 +1,59 @@
 package uts.isd.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import uts.isd.model.Payment;
+import uts.isd.model.User;
 import uts.isd.model.dao.PaymentDAO;
 
 public class AddPaymentServlet extends HttpServlet {
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve payment details from the request
+        String paymentType = request.getParameter("paymentType");
         String cardName = request.getParameter("cardName");
         String cardNumber = request.getParameter("cardNumber");
-        String expiryDate = request.getParameter("expiryDate");
-        String cvv = request.getParameter("cvv");
+        String cardExpiryDate = request.getParameter("cardExpiryDate");
+        String cardCvv = request.getParameter("cardCvv");
 
-        // Initialize PaymentDAO
-        PaymentDAO paymentDAO = null;
-        try {
-            paymentDAO = new PaymentDAO();
-            // Add payment details to the database
-            paymentDAO.addPaymentDetails(cardName, cardNumber, expiryDate, cvv);
-            // Redirect to make payment page after adding payment details
-            response.sendRedirect("makepayment.jsp");
-        } catch (SQLException | ClassNotFoundException e) {
-            // Handle SQLException or ClassNotFoundException
-            e.printStackTrace();
-            // You can redirect to an error page or display an error message here
-            response.getWriter().println("An error occurred while adding payment details.");
-        } finally {
-            // Close the PaymentDAO connection
-            if (paymentDAO != null) {
-                try {
-                    paymentDAO.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    // Handle SQLException while closing connection
-                }
-            }
+        // Check if the user is a staff
+        // if (user != null && user instanceof Staff) {
+        PaymentDAO paymentDAO = (PaymentDAO) session.getAttribute("paymentDAO");
+        System.out.println("Fetched paymentDAO from session: " + paymentDAO);
+
+        if (paymentDAO == null) {
+            System.out.println("paymentDAO is null. Redirecting to ConnServlet");
+            response.sendRedirect("ConnServlet");
+            return;
         }
+
+        try {
+            paymentDAO.addPayment(paymentType, cardName, cardNumber, cardExpiryDate,
+                    cardCvv);
+
+            Payment payment = new Payment();
+            payment.setpaymentType(paymentType);
+            payment.setcardName(cardName);
+            payment.setcardNumber(cardNumber);
+            payment.setcardExpiryDate(cardExpiryDate);
+            payment.setcardCvv(cardCvv);
+            session.setAttribute("payment", payment);
+
+            request.getRequestDispatcher("viewPayment.jsp").include(request, response);
+        } catch (Exception e) {
+            session.setAttribute("error", "Database error: Unable to add payment.");
+            System.out.println(e);
+            response.sendRedirect("addPayment.jsp");
+        }
+
     }
 }

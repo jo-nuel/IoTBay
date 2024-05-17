@@ -7,37 +7,48 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import uts.isd.model.User;
 import uts.isd.model.dao.PaymentDAO;
 
 public class UpdatePaymentServlet extends HttpServlet {
-    private PaymentDAO paymentDAO;
-
     @Override
-    public void init() throws ServletException {
-        try {
-            paymentDAO = new PaymentDAO(); // Initialize DAO
-        } catch (SQLException | ClassNotFoundException ex) {
-            // Handle the exception appropriately
-            System.out.println(ex);
-            // Optionally re-throw the exception
-            throw new ServletException("Failed to initialize PaymentDAO", ex);
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        // if (user instanceof Staff)
+        PaymentDAO paymentDAO = (PaymentDAO) session.getAttribute("paymentDAO");
+
+        if (paymentDAO == null) {
+            System.out.println("paymentDAO is null. Redirecting to ConnServlet");
+            response.sendRedirect("ConnServlet");
+            return;
         }
-    }
 
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int paymentID = Integer.parseInt(request.getParameter("paymentID"));
+        String paymentType = request.getParameter("paymentType");
         String cardName = request.getParameter("cardName");
         String cardNumber = request.getParameter("cardNumber");
-        String expiryDate = request.getParameter("expiryDate");
-        String cvv = request.getParameter("cvv");
+        String cardExpiryDate = request.getParameter("cardExpiryDate");
+        String cardCvv = request.getParameter("cardCvv");
 
         try {
-            paymentDAO.updatePaymentDetails(cardName, cardNumber, expiryDate, cvv);
-            response.sendRedirect("paymentConfirmation.jsp"); // Redirect to confirmation page
+            paymentDAO.updatePayment(paymentID, paymentType, cardName, cardNumber, cardExpiryDate,
+                    cardCvv);
+            response.sendRedirect("viewPayment.jsp");
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle database errors
-            // You can redirect to an error page here if needed
+            System.out.println("SQL Error: " + e.getMessage());
+            session.setAttribute("error", "Database error: Unable to update device.");
+            response.sendRedirect("updatePayment.jsp?id=" + paymentID);
         }
+
+        /*
+         * } else {
+         * session.setAttribute("error", "Unauthorized access.");
+         * response.sendRedirect("login.jsp");
+         * }
+         */
     }
 }

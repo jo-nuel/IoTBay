@@ -48,7 +48,7 @@ public class DeviceDAOTest {
         deviceDAO.updateDevice(999, "Updated Test Device", 299.99,
                 "Updated description", 15, true, "Updated Test",
                 "UpdatedBrand", "updatedUrl");
-        Device device = deviceDAO.findDevice(999);
+        Device device = deviceDAO.findDevice(1016);
         assertEquals("Updated Test Device", device.getDeviceName());
     }
 
@@ -62,7 +62,7 @@ public class DeviceDAOTest {
     @Test
     public void testDeleteDevice() throws SQLException {
         int initialSize = deviceDAO.listAllDevices().size();
-        deviceDAO.deleteDevice(1009);
+        deviceDAO.deleteDevice(1016);
         int newSize = deviceDAO.listAllDevices().size();
         assertEquals(initialSize - 1, newSize);
     }
