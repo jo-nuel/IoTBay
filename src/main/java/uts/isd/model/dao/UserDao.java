@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import uts.isd.model.User;
 
 public class UserDao {
 	private Connection con;
-	private PreparedStatement readSt;
+	private Statement readSt;
 	private String readQuery = "SELECT Name, Password, Phone, Email FROM account";
 
 	public UserDao(Connection connection) throws SQLException {
@@ -19,6 +20,12 @@ public class UserDao {
 		readSt = connection.prepareStatement(readQuery);
 	}
 
+	public UserDao() throws ClassNotFoundException, SQLException { 
+        DBConnector dbConnector = new DBConnector();
+        con = dbConnector.openConnection();
+        con.setAutoCommit(true);
+        readSt = con.createStatement();
+    }
 	public void createUser(String email, String name, String password, String phone) throws SQLException {
 		PreparedStatement st = con.prepareStatement("INSERT INTO account(Name,Password,Phone,Email) VALUES(?,?,?,?)");
 		st.setString(1, name);
@@ -29,7 +36,7 @@ public class UserDao {
 	}
 
 	public ArrayList<User> fetchUsers() throws SQLException {
-		ResultSet rs = readSt.executeQuery();
+		ResultSet rs = readSt.executeQuery(readQuery);
 
 		ArrayList<User> users = new ArrayList<User>();
 		while (rs.next()) {
@@ -50,4 +57,8 @@ public class UserDao {
 
 		return users;
 	}
+
+	public void updatePaymentID( String userID, int paymentID) throws SQLException {
+        readSt.executeUpdate("UPDATE User SET paymentID = " + paymentID + " WHERE userID = " + userID);
+        }
 }

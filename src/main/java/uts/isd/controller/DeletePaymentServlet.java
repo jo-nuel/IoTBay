@@ -29,10 +29,10 @@ public class DeletePaymentServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cardNumber = request.getParameter("cardNumber"); // Assuming card number is used as identifier
+        int paymentID = Integer.parseInt(request.getParameter("paymentID")); // Assuming card number is used as identifier
 
         try {
-            paymentDAO.deletePaymentDetails(cardNumber);
+            paymentDAO.deletePayment(paymentID);
             response.sendRedirect("paymentConfirmation.jsp"); // Redirect to confirmation page
         } catch (SQLException e) {
             e.printStackTrace(); // Handle database errors

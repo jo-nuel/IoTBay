@@ -9,11 +9,12 @@ public class Payment implements Serializable {
     private String cardNumber;
     private String cardExpiryDate;
     private String cardCvv;
-    
+    private String userID;
+    private boolean savedPayment;
     
 //payment date , cardname , cardnumber , card expiry date , card cvv , saved card name , saved card number , saved expiry date , saved cvv
     public Payment(int paymentID, String paymentType, String cardName,
-    String cardNumber, String cardExpiryDate, String cardCvv) {
+    String cardNumber, String cardExpiryDate, String cardCvv,String userID,boolean savedPayment) {
 
         this.paymentID = paymentID;
         this.paymentType = paymentType;
@@ -21,6 +22,9 @@ public class Payment implements Serializable {
         this.cardNumber= cardNumber;
         this.cardExpiryDate = cardExpiryDate;
         this.cardCvv = cardCvv;
+        this.userID = userID;
+        this.savedPayment = savedPayment;
+        
         
     }
 
@@ -75,5 +79,24 @@ public class Payment implements Serializable {
         this.cardCvv = cardCvv;
     }
 
+    public String getUserID() {
+    return userID;
+  }
+
+  public void setUserID(String userID) {
+    this.userID = userID;
+  }
+
+  public void setSavedPayment(boolean savedPayment) {
+    this.savedPayment = savedPayment;
+  }
+
+@Override
+  public String toString() {
+    return "Payment ID: " + paymentID +
+        ", Payment Type: " + paymentType +
+        ", Payment Card Name " + cardName +
+        ", Saved Payment Details: " + savedPayment;
+  }
 
 }

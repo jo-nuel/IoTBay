@@ -16,6 +16,10 @@ public class OrderLineItem implements Serializable {
         this.orderLinePrice = _orderLinePrice;
     }
 
+    public OrderLineItem(){
+        
+    }
+
     public String getOrderLineID() {
         return orderLineID;
     }

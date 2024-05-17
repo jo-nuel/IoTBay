@@ -14,3 +14,63 @@
    <url-pattern>/index/*</url-pattern>
   </servlet-mapping>
 </web-app>
+<servlet>
+    <servlet-name>AddPaymentServlet</servlet-name>
+    <servlet-class>uts.isd.controller.AddPaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>AddPaymentServlet</servlet-name>
+      <url-pattern>/AddPaymentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeletePaymentServlet</servlet-name>
+    <servlet-class>uts.isd.controller.DeletePaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>DeletePaymentServlet</servlet-name>
+      <url-pattern>/DeletePaymentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdatePaymentServlet</servlet-name>
+    <servlet-class>uts.isd.controller.UpdatePaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>UpdatePaymentServlet</servlet-name>
+      <url-pattern>/UpdatePaymentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PaymentServlet</servlet-name>
+    <servlet-class>uts.isd.controller.PaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>PaymentServlet</servlet-name>
+      <url-pattern>/PaymentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewPaymentHistoryServlet</servlet-name>
+    <servlet-class>uts.isd.controller.ViewPaymentHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>ViewPaymentHistoryServlet</servlet-name>
+      <url-pattern>/ViewPaymentHistoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ConnServlet</servlet-name>
+    <servlet-class>uts.isd.controller.ConnServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConnServlet</servlet-name>
+    <url-pattern>/ConnServlet</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+    <servlet-name>UpdatePaymentIDServlet</servlet-name>
+    <servlet-class>uts.isd.controller.UpdatePaymentIDServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePaymentIDServlet</servlet-name>
+    <url-pattern>/UpdatePaymentIDServlet</url-pattern>
+  </servlet-mapping>
+  
