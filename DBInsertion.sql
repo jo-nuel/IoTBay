@@ -68,3 +68,25 @@ INSERT INTO iotbay.customer (userID, customerType, shippingAddress, accountActiv
 	(19, "Individual", "24 Darwinia Loop", false),
 	(20, "Individual", "28 Tapleys Hill Road", false);
 
+INSERT INTO iotbay.supplier (supplierName,emailAddress,phoneNum,recordActive) VALUES
+('TechD', 'techd@example.com', '1234567890', 1),
+('ProsHardware', 'prosh@example.com', '0987654321', 1),
+('ITGadget', 'itgadget@example.com', '1234567890', 0),
+('BrightTech', 'brighttech@example.com', '0987654321', 0),
+('QuantumDevice', 'quantum@example.com', '1234567890', 1),
+('GlobalTech', 'globaltech@example.com', '0987654321', 1),
+('FutureTech', 'futureitech@example.com', '1234567890', 0),
+('Pinnacle', 'pinnacle@example.com', '0987654321', 0),
+('Apex Hardware', 'apexhd@example.com', '1234567890', 1),
+('Alpha Technology', 'alphat@example.com', '0987654321', 1),
+('OmegaSolutions', 'omegas@example.com', '1234567890', 0),
+('Zenith', 'zenith@example.com', '0987654321', 0),
+('PrimeIT', 'primeit@example.com', '1234567890', 1),
+('PeakTech', 'peaktech@example.com', '0987654321', 1),
+('VertexIT', 'vertexit@example.com', '1234567890', 0),
+('Summit Techology', 'summit@example.com', '0987654321', 1),
+('PinnacleDevice', 'pinnacledevice@example.com', '1234567890', 1),
+('ApexITDevice', 'apexit@example.com', '0987654321', 1),
+('ZenithHardware', 'zenithit@example.com', '1234567890', 1),
+('Prime Tech', 'primetech@example.com', '0987654321', 0);
+
