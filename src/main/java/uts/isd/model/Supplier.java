@@ -3,13 +3,13 @@ package uts.isd.model;
 import java.io.Serializable;
 
 public class Supplier implements Serializable {
-    private String supplierID;
+    private int supplierID;
     private String supplierName;
     private String emailAddress;
     private String phoneNum;
     private boolean recordActive;
 
-    public Supplier(String supplierID, String supplierName, String emailAddress, String phoneNum,boolean recordActive) {
+    public Supplier(int supplierID, String supplierName, String emailAddress, String phoneNum,boolean recordActive) {
         this.supplierID = supplierID;
         this.supplierName = supplierName;
         this.emailAddress = emailAddress;
@@ -17,11 +17,11 @@ public class Supplier implements Serializable {
         this.recordActive = recordActive;
     }
 
-    public String getsupplierID() {
+    public int getsupplierID() {
         return supplierID;
     }
 
-    public void setsupplierID(String supplierID) {
+    public void setsupplierID(int supplierID) {
         this.supplierID = supplierID;
     }
 

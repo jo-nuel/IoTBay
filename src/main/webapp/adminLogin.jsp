@@ -12,50 +12,23 @@
     <title>Admin Login</title> 
 </head>
 <body class="loginbody">
-    <%
-        String adminUserName = request.getParameter("adminUserName");
-        String adminPassword = request.getParameter("adminPassword");
+    <form action="<%=request.getContextPath()%>/adminLogin" method="post">
+        <%
+            String userName = request.getParameter("adminUserName");
+            String password = request.getParameter("adminPassword");
+        %>
 
-    %>
+        <% String username = (String) session.getAttribute("userName");%>
 
-    <% if (adminUserName != null || adminPassword != null){
-        if (adminUserName.equals("admin") && adminPassword.equals("secret"))  {  %>
-            <h1>Choose Admin Option</h1>
-            <form method="GET" action="/CustomerManagementServlet">
-                <button type="submit">Customer Management</button>
-            </form>
-            <button type="button" onclick="location.href='supplierManagement.jsp';">Supplier Management</button>
-            <button type="button" onclick="location.href='login.jsp';">Exit</button>
-        <% } else { %>
             <h1 style="color: white;">IoTBay Admin Login</h1>  
-            <form class="login-form">
-                <p style="color: red;">Incorrect Username or Password.</p>
+            <form class="login-form" action="<%=request.getContextPath()%>/adminLogin" method="post">
                 <label for="adminUserName">Username:</label>
                 <input type="text" name="adminUserName" id="adminUserName" required>
                         
                 <label for="adminPassword">Password:</label>
                 <input type="password" name="adminPassword" id="adminPassword" required>
-
                 <button type="submit">Login</button>
-
-                <button type="button" onclick="location.href='login.jsp';">Exit</button>
-            </form>  
-        <% } %>
-
-    <% } else { %>
-        <h1>IoTBay Admin Login</h1>
-        <form class="login-form">
-            <label for="adminUserName">Username:</label>
-            <input type="text" name="adminUserName" id="adminUserName" required>
-                    
-            <label for="adminPassword">Password:</label>
-            <input type="password" name="adminPassword" id="adminPassword" required>
-
-            <button type="submit">Login</button>
-
-            <button type="button" onclick="location.href='login.jsp';">Exit</button>
-        </form>  
-    <% } %> 
-
+            </form>
+    </form>
 </body>
 </html>

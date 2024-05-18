@@ -15,8 +15,8 @@
         <% session.invalidate(); %>
         <h1>IoTBay</h1>
 
-        <h1>Your account has been reset. Re-register to access site.</h1>
+        <h1>Your account has been logout. Re-register to access site.</h1>
 
-        <button><a href="register.jsp">Back to registration.</a></button>
+        <button><a href="adminLogin.jsp">Back to Login.</a></button>
     </body>
 </html>

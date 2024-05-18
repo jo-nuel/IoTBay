@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import uts.isd.model.Supplier;
 
@@ -16,28 +18,23 @@ public class SupplierDAO {
         connection.setAutoCommit(true);
     }
 
-    public ArrayList<Supplier> getAllSuppliers() throws SQLException {
-        String getSupplier = "SELECT supplier.supplierID, supplier.supplierName, supplier.emailAddress, supplier.phoneNum, supplier.recordActive FROM supplier";
+    public List<Supplier> getAllSuppliers() throws SQLException {
+        List<Supplier> suppliers = new ArrayList<>();
+        String sql = "SELECT * FROM supplier";
 
-        ArrayList<Supplier> suppliers = new ArrayList<>();
+        try (Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql)){
 
-        try {
-            PreparedStatement getSuppliers = conn.prepareStatement(getSupplier);
-            ResultSet rs = getSuppliers.executeQuery();
-
-            while (rs.next()) {
-                String supplierID = rs.getString(1);
-                String supplierName = rs.getString(2);
-                String emailAddress = rs.getString(3);
-                String phoneNum = rs.getString(4);
-                Boolean recordActive = rs.getBoolean(5);
-
-                Supplier supplier = new Supplier(supplierID, supplierName, emailAddress, phoneNum, recordActive);
-                suppliers.add(supplier);
+            while (resultSet.next()) {
+                suppliers.add(new Supplier(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getBoolean(5)
+                ));
             }
-        } finally {
-
-        }
+        } 
 
         return suppliers;
     }

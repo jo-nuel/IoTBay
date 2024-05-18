@@ -3,7 +3,7 @@ package uts.isd.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	private String userID;
+	private int userID;
 	private String userName;
 	private String userEmail;
 	private String password;
@@ -12,14 +12,14 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(String _userID, String _userName, String _userEmail, String _password, String _userType) {
-		this.userID = _userID;
-		this.userName = _userName;
-		this.userEmail = _userEmail;
-		this.password = _password;
-		this.userType = _userType;
+	public User(int userId, String userName, String userEmail, String password, String userType) {
+		this.userID = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.password = password;
+		this.userType = userType;
 	}
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
@@ -54,11 +54,6 @@ public class User implements Serializable {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-
-    public void setPhone(String phone) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPhone'");
-    }
 
 	
 }
