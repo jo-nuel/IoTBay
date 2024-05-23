@@ -145,4 +145,12 @@
       <servlet-name>ViewPaymentServlet</servlet-name>
       <url-pattern>/ViewPaymentServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>uts.isd.controller.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>OrderServlet</servlet-name>
+      <url-pattern>/OrderServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -16,6 +16,7 @@ import uts.isd.model.dao.DeviceDAO;
 import uts.isd.model.dao.UserDao;
 import uts.isd.model.dao.CustomerDAO;
 import uts.isd.model.dao.PaymentDAO;
+import uts.isd.model.dao.OrderDAO;
 
 public class ConnServlet extends HttpServlet {
 
@@ -24,6 +25,7 @@ public class ConnServlet extends HttpServlet {
     private CustomerDAO customerDAO;
     private DeviceDAO deviceDAO;
     private PaymentDAO paymentDAO;
+    private OrderDAO orderDAO;
     private Connection conn;
 
     @Override
@@ -48,6 +50,7 @@ public class ConnServlet extends HttpServlet {
             userDAO = new UserDao(conn);
             deviceDAO = new DeviceDAO(conn);
             paymentDAO = new PaymentDAO(conn);
+            orderDAO = new OrderDAO(conn);
             ArrayList<String> categories = deviceDAO.getCategories();
             session.setAttribute("categories", categories);
         } catch (SQLException | ClassNotFoundException e) {
@@ -58,6 +61,7 @@ public class ConnServlet extends HttpServlet {
         session.setAttribute("customerDAO", customerDAO);
         session.setAttribute("deviceDAO", deviceDAO);
         session.setAttribute("paymentDAO", paymentDAO);
+        session.setAttribute("orderDAO", orderDAO);
         request.getRequestDispatcher("login.jsp").include(request, response);
     }
 
